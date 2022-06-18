@@ -8,23 +8,23 @@ from Main_Menu_Screen import display_main_menu_screen
 
 file_reader = FileReader()
 log_entries = file_reader.read_log()
+today_jentry = Jentry(404,404,404,404,404,404,404,404,404)
 journal = Journal(log_entries)
 track_menstruation = True
 trends = []
-today_mood = 0
-today_social = 0
-today_energy = 0
-today_freetime = 0
-today_exercise = 0
-today_diet = 0
-today_sleep = 0
-today_menstruation = False
-today_journal = ""
+
 
 def run():
     if log_entries == "EMPTY":
         track_menstruation = welcome_screen()
-    zero_main_menu()
+    main_menu_button = zero_main_menu()
+    if main_menu_button == "analyze":
+        five_analysis_screen()
+    elif main_menu_button == "journal":
+        one_mood_screen()
+    elif main_menu_button == "quit":
+        print(six_quit_screen())
+    
 
 def welcome_screen():
     #display welcome
@@ -36,16 +36,15 @@ def zero_main_menu():
     show_journal_button = False
     if not datetime.today in journal.get_jentries():
         show_journal_button = True
-    display_main_menu_screen(quote, show_journal_button)
-
+    return display_main_menu_screen(quote, show_journal_button)
     #BUTTONS --> {BOTTOM} of the screen:
         #go to [Trends] screen (screen five)
         #go to [Journal] screen (screen one)
         #go to [Quit] screen (screen six)
 
 def one_mood_screen():
-    #today_mood = display_mood_screen()
-
+    #display_mood_screen()
+    print("mood screen")
     # Back [<-.png] button (to main_menu)
     # prints "How is your mood today on a scale of one to ten?" on screen (make it cozy <3)
     # loop 10 times to display following:
@@ -59,7 +58,6 @@ def one_mood_screen():
     pass
 
 def two_social_energy_freetime_screen():
-    
 
     #do the following each for "Social", "Energy", "Freetime":
         #loop 4 times to display following:
@@ -116,6 +114,7 @@ def four_journal_screen():
     pass
 
 def five_analysis_screen():
+    print("analysis screen")
     #Display graph:
         #X-axis is date
             #should have configuration for 7-day, and 30-day scale
@@ -169,7 +168,7 @@ def six_quit_screen():
     else:
         reminder_or_quote = random.choice(file_reader.read_quotes())
     #display_quit_screen(trend_message, reminder_or_quote)
-    
+    return (trend_message, reminder_or_quote)
     #BUTTONS --> {Bottom} of the screen::
         # a [Back] button (go to screen one --> main menu)
         # and a [Quit] button (which closes the application)
