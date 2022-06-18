@@ -1,0 +1,5 @@
+True|Tracking Menstruation
+
+06/17/2022|5|1|1|2|0|3|2|true|First journal entry, omg!
+06/17/2022|5|1|1|2|0|3|2|true|Second entry, kinda lame
+06/17/2022|5|1|1|2|0|3|2|true|Might delete this app
