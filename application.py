@@ -5,6 +5,8 @@ from file_reader import FileReader
 from journal import *
 import random
 from Main_Menu_Screen import display_main_menu_screen
+import mood_screen
+from Analyze_Screen import display_analyze_screen
 
 file_reader = FileReader()
 log_entries = file_reader.read_log()
@@ -43,8 +45,8 @@ def zero_main_menu():
         #go to [Quit] screen (screen six)
 
 def one_mood_screen():
-    #display_mood_screen()
-    print("mood screen")
+    today_jentry.set_value("Mood", mood_screen.main()) 
+    
     # Back [<-.png] button (to main_menu)
     # prints "How is your mood today on a scale of one to ten?" on screen (make it cozy <3)
     # loop 10 times to display following:
@@ -114,7 +116,8 @@ def four_journal_screen():
     pass
 
 def five_analysis_screen():
-    print("analysis screen")
+    #pass journal object
+    display_analyze_screen()
     #Display graph:
         #X-axis is date
             #should have configuration for 7-day, and 30-day scale
