@@ -1,12 +1,13 @@
 from tkinter import W
 import pygame
-from pygame import display, image
+from pygame import display, image, mouse
 
 pygame.init()
 SCREEN_HEIGHT = 864
 SCREEN_WIDTH = 1536
 WIN = display.set_mode((0,0), pygame.FULLSCREEN)
-display.set_caption("practice screen")
+display.set_caption("mood screen")
+cozyfont = pygame.font.Font('resource\CooperFiveOpti-Black.otf',  80)
 
 WHITE = (255,255,255)
 FPS = 60
@@ -75,12 +76,12 @@ def draw_image(image, xy):
 def draw_bg(color):
     WIN.fill(color) #fill the window with color, color is a tuple variable (R,G,B)
 
-
 def main():
     clock = pygame.time.Clock()
     run = True
     while run: #main loop that runs every frame
         clock.tick(FPS) #controls the update speed of the program
+                    
         for event in pygame.event.get(): #Checks all pygame events every frame
             if event.type == pygame.QUIT: #If the user quits the program
                 run = False #Stop running
@@ -89,20 +90,15 @@ def main():
                 pygame.quit() #quit
                 exit() #terminate
 
-            if event.type == pygame.MOUSEMOTION:
-                for i in range(10):
-                    if(button_list[i].collidepoint(pygame.mouse.get_pos())):
-                        print("mouse is over button " + str(i))
-
             if event.type == pygame.MOUSEBUTTONDOWN: #If the user clicked 
                 for i in range(10):
                     if(button_list[i].collidepoint(event.pos)):
-                        print(i + 1)
+                        #print(i + 1)
                         return(i + 1)
 
-                if(button_confirm.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    pygame.quit() #quit
-                    exit() #terminate
+                # if(button_confirm.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
+                #     pygame.quit() #quit
+                #     exit() #terminate
 
        
         draw_bg(WHITE)
@@ -113,7 +109,12 @@ def main():
         for i in range(10):
             draw_image(button_image_list[i], button_xy_list[i])
 
-        pygame.display.flip()#This updates the screen to show all changes     
+        for i in range(10):
+            if(button_list[i].collidepoint(pygame.mouse.get_pos())):
+                words = cozyfont.render(str(i + 1), True, (255,255,255))
+                WIN.blit(words, pygame.mouse.get_pos())
+
+        pygame.display.flip()#This updates the screen to show all changes
         
     pygame.quit()
 
