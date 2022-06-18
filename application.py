@@ -1,18 +1,19 @@
+from asyncio.windows_events import NULL
+from contextlib import nullcontext
 import pygame
-from file_reader import *
+from file_reader import FileReader
 from journal import *
 import random
 
 file_reader = FileReader()
-journal = 0
-log_entries = []
+journal = NULL
+log_entries = "EMPTY"
 
 
 
 def zero_main_menu():
     #display quote of the day --> randomly generated from list of about 50 quotes
     quote = random.choice(file_reader.read_quotes())
-    print(quote)
     
     #show health reminder --> based on data
         #Randomly show ONE trend noticed at a time
@@ -144,6 +145,7 @@ def six_quit_screen():
 def run():
 #construct application for user
     #if first time (no log) --> prompt menstruating?
+    file_reader = FileReader()
     log_entries = file_reader.read_log()
     if log_entries == "EMPTY":
         #prompt menstruating?

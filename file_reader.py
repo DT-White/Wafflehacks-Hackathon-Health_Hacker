@@ -3,7 +3,7 @@ from pathlib import Path
 
 class FileReader:
 
-    def __init__(self) -> None:
+    def __init__(self):
         pass
 
     __track_menstruation = False
