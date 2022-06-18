@@ -1,14 +1,16 @@
 import datetime
 
-class jentry:
+from FileReader import file_reader
+
+class Journal:
     #Variables
     __jentries = {}
     __is_menstruating = False
 
     #Constructor
-    def __journal__(self, is_menstruating, jentries):
-        self.is_menstruating = is_menstruating
-        # tell the reader to get log to fill in "dictionary"
+    def __Journal__(self):        
+        for current_jentry in file_reader.read_log:
+            self.__jentries[jentry[0]] = Jentry(current_jentry[1])
     
     #Getters
     def get_menstruation(self):
