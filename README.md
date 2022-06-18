@@ -1,2 +1,2 @@
 # Wafflehacks-Health-Journal
-Collaborative wafflehacks project 
+Collaborative wafflehacks project

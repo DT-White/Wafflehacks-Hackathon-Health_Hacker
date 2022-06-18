@@ -4,26 +4,46 @@ import pygame
 from file_reader import FileReader
 from journal import *
 import random
+from Main_Menu_Screen import display_main_menu_screen
 
 file_reader = FileReader()
-journal = NULL
-log_entries = "EMPTY"
+log_entries = file_reader.read_log()
+today_jentry = Jentry(404,404,404,404,404,404,404,404,404)
+journal = Journal(log_entries)
+track_menstruation = True
+trends = []
 
 
+def run():
+    # if log_entries == "EMPTY":
+    #     track_menstruation = welcome_screen()
+    # main_menu_button = zero_main_menu()
+    # if main_menu_button == "analyze":
+    #     five_analysis_screen()
+    # elif main_menu_button == "journal":
+    #     one_mood_screen()
+    six_quit_screen()
+    
+
+def welcome_screen():
+    #display welcome
+    #ask about menstruation
+    return #true or false
 
 def zero_main_menu():
-    #display quote of the day --> randomly generated from list of about 50 quotes
     quote = random.choice(file_reader.read_quotes())
-    
-    #show health reminder --> based on data
-        #Randomly show ONE trend noticed at a time
-
+    show_journal_button = False
+    if not datetime.today in journal.get_jentries():
+        show_journal_button = True
+    return display_main_menu_screen(quote, show_journal_button)
     #BUTTONS --> {BOTTOM} of the screen:
         #go to [Trends] screen (screen five)
         #go to [Journal] screen (screen one)
         #go to [Quit] screen (screen six)
 
 def one_mood_screen():
+    #display_mood_screen()
+    print("mood screen")
     # Back [<-.png] button (to main_menu)
     # prints "How is your mood today on a scale of one to ten?" on screen (make it cozy <3)
     # loop 10 times to display following:
@@ -34,9 +54,10 @@ def one_mood_screen():
         #Button should be {between 5 and 6}
     #needs to also display "1", and "10" underneath the line of buttons
         #don't want to display all 10 numbers
-    pass
+    
 
 def two_social_energy_freetime_screen():
+
     #do the following each for "Social", "Energy", "Freetime":
         #loop 4 times to display following:
             #A box with [i] <-- iterates {0 through 3}
@@ -92,6 +113,7 @@ def four_journal_screen():
     pass
 
 def five_analysis_screen():
+    print("analysis screen")
     #Display graph:
         #X-axis is date
             #should have configuration for 7-day, and 30-day scale
@@ -125,30 +147,38 @@ def five_analysis_screen():
         #display a red line starting with the day the period started and period ended
             #should account for a currently occuring period (ending at the present day)
                 #Do we want to have a symbol indicating an on-going period?
-    pass
+    
 
 def six_quit_screen():
-    #Display trend analyses:
-        #Only if there are trends to display
-            #Default should be "You're doing well! Keep up the good work!"
-            #When no trend to display
-            #Randomly show ONE trend noticed at a time
-        #Display reminders -OR- quote of the day
-            #Default is quote of the day
-            #Reminders prompt user to input data if they haven't yet
-    
+    trend_message = "You're doing well! Keep up the good work!"
+    reminder_or_quote = ""
+    print(trend_message)
+    if journal.check_low_score("Mood"):
+        trends.append("Looks like your mood has been low recently :\(")
+        get_downward_trend_message("Social")
+        get_downward_trend_message("Energy")
+        get_downward_trend_message("Freetime")
+        get_downward_trend_message("Exercise")
+        get_downward_trend_message("Diet")
+        get_downward_trend_message("Sleep")
+    if len(trends) > 0:
+        trend_message = random.choice(trends)
+    print(trend_message)
+    if not datetime.today in journal.get_jentries():
+        reminder_or_quote = "Don't forget to log your journal entry for today!"
+    else:
+        reminder_or_quote = random.choice(file_reader.read_quotes())
+    print(reminder_or_quote)
+    #display_quit_screen(trend_message, reminder_or_quote)
+    print (trend_message, reminder_or_quote)
     #BUTTONS --> {Bottom} of the screen::
         # a [Back] button (go to screen one --> main menu)
         # and a [Quit] button (which closes the application)
-    pass
+    
 
-def run():
-    file_reader = FileReader()
-    log_entries = file_reader.read_log()
-    if log_entries == "EMPTY":
-        #prompt menstruating?
-        pass
-    journal = Journal(log_entries)
-    zero_main_menu()
+def get_downward_trend_message(value):
+    if journal.is_downward_trend(value):
+        trends.append("There's been a downward trend in your " + value + " recently.")
+
 
 run()
