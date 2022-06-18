@@ -17,6 +17,7 @@ FPS = 60
 #testJentry = Jentry(mood, social, energy, freetime, exercise, diet, sleep, menstruation, journal)
 
 testJentry = Jentry(3, 3, 3, 3,3,3,3,False,"This Jentry is for testing")
+#testJournal = {,,,,,,}
 
 background_image = pygame.image.load("resource\\background.png") #load an image as a surface
 
@@ -98,7 +99,7 @@ def draw_line():
     #pygame.draw.rect(surface, color, pygame.Rect(30, 30, 60, 60))
     pygame.draw.line(WIN, (0,0,0), (0,0), (600,100), 6)
 
-def display_navigation(stat_select, timespan, period_selected):
+def display_navigation(stat_selected, timespan, period_selected):
     if(period_selected):
             draw_image(icon_period_s, icon_period_xy)
     else:
@@ -106,28 +107,28 @@ def display_navigation(stat_select, timespan, period_selected):
 
     draw_image(icon_back_arrow, icon_back_arrow_xy)
 
-    if(stat_select == "social"):
+    if(stat_selected == "social"):
         draw_image(icon_social_s, icon_social_xy)
     else:
         draw_image(icon_social_u, icon_social_xy)
 
-    if(stat_select == "exercise"):
+    if(stat_selected == "exercise"):
         draw_image(icon_exercise_s, icon_exercise_xy)
     else:
         draw_image(icon_exercise_u, icon_exercise_xy)
-    if(stat_select == "time"):
+    if(stat_selected == "time"):
         draw_image(icon_time_s, icon_time_xy)
     else:
         draw_image(icon_time_u, icon_time_xy)
-    if(stat_select == "diet"):
+    if(stat_selected == "diet"):
         draw_image(icon_diet_s, icon_diet_xy)
     else:
         draw_image(icon_diet_u, icon_diet_xy)
-    if(stat_select == "energy"):
+    if(stat_selected == "energy"):
         draw_image(icon_energy_s, icon_energy_xy)
     else:
         draw_image(icon_energy_u, icon_energy_xy)
-    if(stat_select == "sleep"):
+    if(stat_selected == "sleep"):
         draw_image(icon_sleep_s, icon_sleep_xy)
     else:
         draw_image(icon_sleep_u, icon_sleep_xy)
@@ -142,11 +143,13 @@ def display_navigation(stat_select, timespan, period_selected):
     draw_image(icon_move_backward, icon_move_backward_xy)
     draw_image(icon_move_forward, icon_move_forward_xy)
 
+def graph_stat(stat_selected):
+    pass
 
 def display_analyze_screen():
     clock = pygame.time.Clock()
     run = True
-    stat_select = ""
+    stat_selected = ""
     timespan = "week"
     period_selected = False
 
@@ -162,19 +165,18 @@ def display_analyze_screen():
                 print(event.pos)
                 if(icon_period_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
                     period_selected = not period_selected
-                
                 if(icon_social_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    stat_select = "social"
+                    stat_selected = "social"
                 if(icon_exercise_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    stat_select = "exercise"
+                    stat_selected = "exercise"
                 if(icon_time_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    stat_select = "time"
+                    stat_selected = "time"
                 if(icon_diet_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    stat_select = "diet"
+                    stat_selected = "diet"
                 if(icon_energy_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    stat_select = "energy"
+                    stat_selected = "energy"
                 if(icon_sleep_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    stat_select = "sleep"
+                    stat_selected = "sleep"
                 if(icon_month_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
                     timespan = "month"
                 if(icon_week_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
@@ -185,10 +187,12 @@ def display_analyze_screen():
         draw_image(background_image, (0,0))
         ######### DISPLAY GRAPH ############
         draw_image(img_axis, axis_xy)
+        if(stat_selected != ""):
+            graph_stat(stat_selected)
 
 
         ######### DISPLAY NAVIGATION #########
-        display_navigation(stat_select, timespan, period_selected)
+        display_navigation(stat_selected, timespan, period_selected)
 
 
         pygame.display.flip()#This updates the screen to show all changes     
