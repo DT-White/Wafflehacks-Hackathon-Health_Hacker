@@ -25,6 +25,11 @@ background_image = pygame.image.load("resource\\background.png") #load an image 
 img_axis = pygame.image.load("resource\\axis_week.png").convert_alpha() #load an image, convert alpha preserves transparency
 axis_xy = (113,79)
 
+graph_blue_bar = pygame.image.load("resource\\graph_bar_blue.png").convert_alpha()
+graph_green_bar = pygame.image.load("resource\\graph_bar_green.png").convert_alpha()
+graph_red_bar = pygame.image.load("resource\\graph_bar_red.png").convert_alpha()
+
+
 icon_period_s = pygame.image.load("resource\\icon_period_selected.png").convert_alpha() #load an image, convert alpha preserves transparency
 icon_period_u = pygame.image.load("resource\\icon_period_unselected.png").convert_alpha() #load an image, convert alpha preserves transparency
 icon_period_xy = (1250,0)
@@ -108,36 +113,36 @@ def display_navigation(stat_selected, timespan, period_selected):
 
     draw_image(icon_back_arrow, icon_back_arrow_xy)
 
-    if(stat_selected == "social"):
+    if(stat_selected == "Social"):
         draw_image(icon_social_s, icon_social_xy)
     else:
         draw_image(icon_social_u, icon_social_xy)
 
-    if(stat_selected == "exercise"):
+    if(stat_selected == "Exercise"):
         draw_image(icon_exercise_s, icon_exercise_xy)
     else:
         draw_image(icon_exercise_u, icon_exercise_xy)
-    if(stat_selected == "time"):
+    if(stat_selected == "Time"):
         draw_image(icon_time_s, icon_time_xy)
     else:
         draw_image(icon_time_u, icon_time_xy)
-    if(stat_selected == "diet"):
+    if(stat_selected == "Diet"):
         draw_image(icon_diet_s, icon_diet_xy)
     else:
         draw_image(icon_diet_u, icon_diet_xy)
-    if(stat_selected == "energy"):
+    if(stat_selected == "Energy"):
         draw_image(icon_energy_s, icon_energy_xy)
     else:
         draw_image(icon_energy_u, icon_energy_xy)
-    if(stat_selected == "sleep"):
+    if(stat_selected == "Sleep"):
         draw_image(icon_sleep_s, icon_sleep_xy)
     else:
         draw_image(icon_sleep_u, icon_sleep_xy)
-    if(timespan == "month"):
+    if(timespan == "Month"):
         draw_image(icon_month_s, icon_month_xy)
     else:
         draw_image(icon_month_u, icon_month_xy)
-    if(timespan == "week"):
+    if(timespan == "Week"):
         draw_image(icon_week_s, icon_week_xy)
     else:
         draw_image(icon_week_u, icon_week_xy)
@@ -145,13 +150,31 @@ def display_navigation(stat_selected, timespan, period_selected):
     draw_image(icon_move_forward, icon_move_forward_xy)
 
 def graph_stat(stat_selected):
-    pass
+    bars = testJentry.get_value(stat_selected)
+    print("Bars found to be", bars)
+    if(bars != 0):
+        xy = (123, 705)
+        for i in range(7):
+            draw_bar_graph(bars,(xy[0] + (152*i) ,xy[1]))
+
+def draw_bar_graph(bars, xy):
+    if(bars == 1):
+        graph_bar_rect = graph_red_bar.get_rect(topleft = xy)
+    elif(bars == 2):
+        graph_bar_rect = graph_green_bar.get_rect(topleft = xy)
+    elif(bars == 3):
+        graph_bar_rect = graph_blue_bar.get_rect(topleft = xy)
+
+    for i in range(bars):
+        graph_bar_rect = graph_blue_bar.get_rect(topleft = xy)
+        draw_image(graph_blue_bar, (xy[0], xy[1]+ (i*207)))
+
 
 def display_analyze_screen():
     clock = pygame.time.Clock()
     run = True
     stat_selected = ""
-    timespan = "week"
+    timespan = "Week"
     period_selected = False
 
     while run: #main loop that runs every frame
@@ -169,21 +192,21 @@ def display_analyze_screen():
                 if(icon_back_arrow_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
                     return "back"
                 if(icon_social_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    stat_selected = "social"
+                    stat_selected = "Social"
                 if(icon_exercise_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    stat_selected = "exercise"
+                    stat_selected = "Exercise"
                 if(icon_time_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    stat_selected = "time"
+                    stat_selected = "Time"
                 if(icon_diet_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    stat_selected = "diet"
+                    stat_selected = "Diet"
                 if(icon_energy_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    stat_selected = "energy"
+                    stat_selected = "Energy"
                 if(icon_sleep_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    stat_selected = "sleep"
+                    stat_selected = "Sleep"
                 if(icon_month_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    timespan = "month"
+                    timespan = "Month"
                 if(icon_week_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    timespan = "week"
+                    timespan = "Week"
                 
 
 
@@ -191,7 +214,8 @@ def display_analyze_screen():
         ######### DISPLAY GRAPH ############
         draw_image(img_axis, axis_xy)
         if(stat_selected != ""):
-            graph_stat(stat_selected)
+            pass
+            # graph_stat(stat_selected)
 
 
         ######### DISPLAY NAVIGATION #########
@@ -204,3 +228,14 @@ def display_analyze_screen():
 
 if __name__ == "__main__":
     display_analyze_screen()
+
+
+# (1032, 708)
+# (879, 708)
+# (725, 708)
+# (575, 711)
+# (426, 708)
+# (270, 708)
+# (124, 707)
+
+#(152, 207) bar dimensions
