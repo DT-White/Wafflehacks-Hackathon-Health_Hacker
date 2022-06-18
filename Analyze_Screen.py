@@ -166,6 +166,8 @@ def display_analyze_screen():
                 print(event.pos)
                 if(icon_period_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
                     period_selected = not period_selected
+                if(icon_back_arrow_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
+                    return "back"
                 if(icon_social_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
                     stat_selected = "social"
                 if(icon_exercise_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
