@@ -7,15 +7,7 @@ file_reader = FileReader()
 journal = 0
 log_entries = []
 
-def run():
-#construct application for user
-    #if first time (no log) --> prompt menstruating?
-    log_entries = file_reader.read_log()
-    if log_entries == "EMPTY":
-        #prompt menstruating?
-        pass
-    journal = Journal(log_entries)
-    zero_main_menu()
+
 
 def zero_main_menu():
     #display quote of the day --> randomly generated from list of about 50 quotes
@@ -29,7 +21,6 @@ def zero_main_menu():
         #go to [Trends] screen (screen five)
         #go to [Journal] screen (screen one)
         #go to [Quit] screen (screen six)
-    pass
 
 def one_mood_screen():
     # Back [<-.png] button (to main_menu)
@@ -150,3 +141,14 @@ def six_quit_screen():
         # and a [Quit] button (which closes the application)
     pass
 
+def run():
+#construct application for user
+    #if first time (no log) --> prompt menstruating?
+    log_entries = file_reader.read_log()
+    if log_entries == "EMPTY":
+        #prompt menstruating?
+        pass
+    journal = Journal(log_entries)
+    zero_main_menu()
+
+run()
