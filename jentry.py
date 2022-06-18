@@ -1,9 +1,9 @@
 import pygame
-import datetime
+from datetime import datetime
 
 class Jentry:
     #Variables
-    today = datetime.datetime.now().strftime("%x")
+    today = datetime.now().strftime("%x")
     mood = 0
     social = 0
     energy = 0
@@ -16,19 +16,22 @@ class Jentry:
     
 
     #Constructor
-    def __jentry__(self, mood, social, energy, freetime, exercise, diet, sleep, menstruation, journal):
-        self.today = datetime.datetime.now().strftime("%x") # --> MM/dd/yy
-        self.mood = mood
-        self.social = social
-        self.energy = energy
-        self.freetime = freetime
-        self.exercise = exercise
-        self.diet = diet
-        self.sleep = sleep
-        self.menstruation = menstruation
-        self.journal = journal
+    def __Jentry__(self, mood, social, energy, freetime, exercise, diet, sleep, menstruation, journal):
+        self.today = datetime.now().strftime("%x") # --> MM/dd/yy
+        self.mood = int(mood)
+        self.social = int(social)
+        self.energy = int(energy)
+        self.freetime = int(freetime)
+        self.exercise = int(exercise)
+        self.diet = int(diet)
+        self.sleep = int(sleep)
+        self.menstruation = bool(menstruation == "True")
+        self.journal = str(journal)
     
     #Getters
+    def get_date(self):
+        return self.today
+
     def get_mood(self):
         return self.mood
         
@@ -55,9 +58,6 @@ class Jentry:
 
     def get_journal(self):
         return self.journal
-
-    def get_date(self):
-        return self.today
     
     #Setters
     
@@ -65,3 +65,25 @@ class Jentry:
     def get_log(self):
         log = self.today + "|" + self.mood + "|" + self.social + "|" + self.energy + "|" + self.freetime + "|" + self.energy + "|" + self.diet + "|" + self.sleep + "|" + self.menstruation + "|" + self.journal
         return log
+
+    def get_value(self, value_to_get):
+        if (value_to_get == "Date"):
+            return self.get_date
+        elif (value_to_get == "Mood"):
+            return self.get_mood
+        elif (value_to_get == "Social"):
+            return self.get_social
+        elif (value_to_get == "Energy"):
+            return self.get_energy
+        elif (value_to_get == "Freetime"):
+            return self.get_freetime
+        elif (value_to_get == "Energy"):
+            return self.get_energy
+        elif (value_to_get == "Diet"):
+            return self.get_diet
+        elif (value_to_get == "Sleep"):
+            return self.get_sleep
+        elif (value_to_get == "Menstruation"):
+            return self.get_menstruation
+        elif (value_to_get == "Journal"):
+            return self.get_journal

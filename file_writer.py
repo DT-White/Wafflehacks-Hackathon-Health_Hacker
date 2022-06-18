@@ -13,9 +13,10 @@ class FileWriter:
         p = Path(__file__)
         filepath = str(p.parent.absolute()) + "\jentry_log.txt"
         if not exists(filepath):
-            open(filepath, "x")
+            file = open(filepath, "x")
+            file.close()
             file = open(filepath, "a")
-            file.write(str(self.track_menstruation) + "|Tracking Menstruation")
+            file.write(str(self.track_menstruation) + "|Tracking Menstruation\n")
             file.close()
         file = open(filepath, "a")
         file.write("\n" + log_entry)
