@@ -36,17 +36,7 @@ class Journal:
     #Setters
     
     #Methods
-
-    def is_downward_trend(self, value_to_check):
-        day_one, day_two, day_three = self.generate_score(value_to_check)
-        return day_one < day_two and day_two < day_three
-
-    def check_lowscore(self, value_to_check):
-        day_one, day_two, day_three = self.generate_score(value_to_check)
-            
-        return (day_two + day_one + day_three) <= 3
-
-    def generate_score(self, value_to_check):
+    def __generate_score(self, value_to_check):
         today = datetime.now().strftime("%x")
         yesterday = today - timedelta(days= 1)
         two_day_ago = today - timedelta(days= 2)
@@ -56,6 +46,15 @@ class Journal:
         day_three_score = self.jentries[two_day_ago].get_value(value_to_check)
         
         return tuple(day_one_score, day_two_score, day_three_score)
+        
+    def is_downward_trend(self, value_to_check):
+        day_one, day_two, day_three = self.__generate_score(value_to_check)
+        return day_one < day_two and day_two < day_three
+
+    def check_lowscore(self, value_to_check):
+        day_one, day_two, day_three = self.__generate_score(value_to_check)
+            
+        return (day_two + day_one + day_three) <= 3
 
     def downward_spiral(self, value_to_check): #for the memems
         return self.is_downward_trend(value_to_check) and self.check_lowscore(value_to_check)
