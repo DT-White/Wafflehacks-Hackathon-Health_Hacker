@@ -5,6 +5,7 @@ SCREEN_HEIGHT = 1536
 SCREEN_WIDTH = 864
 WIN = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
 pygame.display.set_caption("practice screen")
+print(WIN.get_size())
 
 WHITE = (255,255,255)
 FPS = 60
