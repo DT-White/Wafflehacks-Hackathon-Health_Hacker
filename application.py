@@ -1,27 +1,28 @@
-from asyncio.windows_events import NULL
+
 from contextlib import nullcontext
 import pygame
 from file_reader import FileReader
 from journal import *
 import random
-from Main_Menu_Screen import display_main_menu_screen
+# from Main_Menu_Screen import display_main_menu_screen
 
 file_reader = FileReader()
 log_entries = file_reader.read_log()
-today_jentry = Jentry(404,404,404,404,404,404,404,404,404)
 journal = Journal(log_entries)
+today_jentry = Jentry(404,404,404,404,404,404,404,404,404)
+journal.add_to_jentries_map(today_jentry)
 track_menstruation = True
 trends = []
 
 
 def run():
-    # if log_entries == "EMPTY":
-    #     track_menstruation = welcome_screen()
-    # main_menu_button = zero_main_menu()
-    # if main_menu_button == "analyze":
-    #     five_analysis_screen()
-    # elif main_menu_button == "journal":
-    #     one_mood_screen()
+    if log_entries == "EMPTY":
+        track_menstruation = welcome_screen()
+    main_menu_button = zero_main_menu()
+    if main_menu_button == "analyze":
+        five_analysis_screen()
+    elif main_menu_button == "journal":
+        one_mood_screen()
     six_quit_screen()
     
 
@@ -152,7 +153,6 @@ def five_analysis_screen():
 def six_quit_screen():
     trend_message = "You're doing well! Keep up the good work!"
     reminder_or_quote = ""
-    print(trend_message)
     if journal.check_low_score("Mood"):
         trends.append("Looks like your mood has been low recently :\(")
         get_downward_trend_message("Social")
@@ -180,5 +180,7 @@ def get_downward_trend_message(value):
     if journal.is_downward_trend(value):
         trends.append("There's been a downward trend in your " + value + " recently.")
 
-
-run()
+#six_quit_screen()
+# run()
+for j in journal.get_jentries():
+    print(j)

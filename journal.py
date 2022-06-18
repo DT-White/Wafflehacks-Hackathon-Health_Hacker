@@ -38,8 +38,8 @@ class Journal:
     #Methods
     def __generate_score(self, value_to_check):
         today = datetime.now().strftime("%x")
-        yesterday = datetime.now() - timedelta(days= 1)
-        two_day_ago = datetime.now() - timedelta(days= 2)
+        yesterday = (datetime.now() - timedelta(days= 1)).strftime("%x")
+        two_day_ago = (datetime.now() - timedelta(days= 2)).strftime("%x")
 
         day_one_score = self.jentries[today].get_value(value_to_check)
         day_two_score = self.jentries[yesterday].get_value(value_to_check)
@@ -80,3 +80,6 @@ class Journal:
             monthly_sum += self.jentries[current_day].get_value(value_to_check)
 
         return monthly_sum/30
+
+    def add_to_jentries_map(self, jentry):
+       self.jentries = {jentry.get_date() : jentry}
