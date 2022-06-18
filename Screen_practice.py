@@ -11,7 +11,7 @@ WHITE = (255,255,255)
 FPS = 60
 
 background_image = pygame.image.load(os.path.join('resource', 'background.png')) #load an image as a surface
-button_image = pygame.image.load(os.path.join('resource', 'button_quit.png')).convert_alpha() #load an image, convert alpha preserves transparency
+button_image = pygame.image.load(os.path.join('resource', 'button_mood_submit.png')).convert_alpha() #load an image, convert alpha preserves transparency
 button_xy = (500,500)
 button_rect = button_image.get_rect(topleft = button_xy)
 

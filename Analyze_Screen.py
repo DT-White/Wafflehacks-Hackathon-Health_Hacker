@@ -170,7 +170,7 @@ def graph_line(current_week):
     for day in current_week:
         x = (179)+(151*i)
         y = (684)-(day.get_value("Mood")*62)
-        #pygame.draw.line(WIN, pygame.Color("#ffcc00ff"), (x,y), (600,100), 6)
+        
         draw_image(graph_data_point, (x,y))
         i+=1
     
