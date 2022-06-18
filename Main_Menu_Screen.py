@@ -125,12 +125,9 @@ def display_main_menu_screen(random_quote, show_journal_button):
         draw_image(button_analyze, button_analyze_xy)
         draw_image(button_journal, button_journal_xy)
         draw_image(button_quit, button_quit_xy)
-        text_bg_xy = (110,90)
-        draw_image(text_bg, text_bg_xy)
-        render_text(random_quote, (123, 107))
         text_bg_xy = (110,350)
         draw_image(text_bg, text_bg_xy)
-        render_text("1234567890123456789012345678901234567890", (123, 360))
+        render_text(random_quote, (123, 360))
         
         pygame.display.flip()#This updates the screen to show all changes     
         

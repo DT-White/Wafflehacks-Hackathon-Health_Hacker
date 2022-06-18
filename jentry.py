@@ -29,6 +29,9 @@ class Jentry:
         self.sleep = int(sleep)
         self.menstruation = bool(menstruation == "True")
         self.journal = str(journal)
+
+    def __str__(self):
+        return str(self.date) + "|" + str(self.mood) + "|" + str(self.social) + "|" + str(self.energy) + "|" + str(self.freetime) + "|" + str(self.energy) + "|" + str(self.diet) + "|" + str(self.sleep) + "|" + str(self.menstruation) + "|" + str(self.journal)
     
     #Getters
     def get_date(self):
@@ -73,8 +76,8 @@ class Jentry:
             self.energy = new_value
         elif (value_to_set == "Freetime"):
             self.freetime = new_value
-        elif (value_to_set == "Energy"):
-            self.energy = new_value
+        elif (value_to_set == "Exercise"):
+            self.exercise = new_value
         elif (value_to_set == "Diet"):
             self.diet = new_value
         elif (value_to_set == "Sleep"):
@@ -100,8 +103,8 @@ class Jentry:
             return self.energy
         elif (value_to_get == "Freetime"):
             return self.freetime
-        elif (value_to_get == "Energy"):
-            return self.energy
+        elif (value_to_get == "Exercise"):
+            return self.exercise
         elif (value_to_get == "Diet"):
             return self.diet
         elif (value_to_get == "Sleep"):
