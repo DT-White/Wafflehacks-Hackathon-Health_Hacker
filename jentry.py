@@ -3,7 +3,7 @@ from datetime import datetime
 
 class Jentry:
     #Variables
-    today = datetime.now().strftime("%x")
+    today = 404
     mood = 404
     social = 404
     energy = 404
