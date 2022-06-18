@@ -143,8 +143,6 @@ def six_quit_screen():
     pass
 
 def run():
-#construct application for user
-    #if first time (no log) --> prompt menstruating?
     file_reader = FileReader()
     log_entries = file_reader.read_log()
     if log_entries == "EMPTY":
