@@ -10,6 +10,7 @@ file_reader = FileReader()
 log_entries = file_reader.read_log()
 journal = Journal(log_entries)
 track_menstruation = True
+trends = []
 
 def run():
     if log_entries == "EMPTY":
@@ -139,21 +140,31 @@ def five_analysis_screen():
 
 def six_quit_screen():
     trend_message = "You're doing well! Keep up the good work!"
-    trends = []
-    #if journal.check_lowscore(journal.)
-    #Display trend analyses:
-        #Only if there are trends to display
-            #When no trend to display
-            #Randomly show ONE trend noticed at a time
-        #Display reminders -OR- quote of the day
-            #Default is quote of the day
-            #Reminders prompt user to input data if they haven't yet
+    reminder_or_quote = ""
+    if journal.check_lowscore("Mood"):
+        trends.append("Looks like your mood has been low recently :\(")
+        get_downward_trend_message("Social")
+        get_downward_trend_message("Energy")
+        get_downward_trend_message("Freetime")
+        get_downward_trend_message("Exercise")
+        get_downward_trend_message("Diet")
+        get_downward_trend_message("Sleep")
+    if len(trends) > 0:
+        trend_message = random.choice(trends)
+    if not datetime.today in journal.get_jentries():
+        reminder_or_quote = "Don't forget to log your journal entry for today!"
+    else:
+        reminder_or_quote = random.choice(file_reader.read_quotes())
+    #display_quit_screen(trend_message, reminder_or_quote)
     
     #BUTTONS --> {Bottom} of the screen::
         # a [Back] button (go to screen one --> main menu)
         # and a [Quit] button (which closes the application)
-    pass
+    
 
+def get_downward_trend_message(value):
+    if journal.is_downward_trend(value):
+        trends.append("There's been a downward trend in your " + value + " recently.")
 
 
 run()
