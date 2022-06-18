@@ -2,6 +2,7 @@ import os
 import pygame
 from jentry import Jentry
 from pathlib import Path
+import datetime
 
 pygame.init()
 
@@ -16,7 +17,11 @@ FPS = 60
 
 #testJentry = Jentry(mood, social, energy, freetime, exercise, diet, sleep, menstruation, journal)
 
+<<<<<<< HEAD
 #testJentry = Jentry(3, 3, 3, 3,3,3,3,False,"This Jentry is for testing")
+=======
+testJentry = Jentry("06/18/22",3, 3, 3, 3,3,3,3,False,"This Jentry is for testing")
+>>>>>>> c42020604bb91ed9792a37f070e969c93d5fff44
 #testJournal = {,,,,,,}
 
 background_image = pygame.image.load("resource\\background.png") #load an image as a surface
@@ -165,6 +170,8 @@ def display_analyze_screen():
                 print(event.pos)
                 if(icon_period_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
                     period_selected = not period_selected
+                if(icon_back_arrow_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
+                    return "back"
                 if(icon_social_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
                     stat_selected = "social"
                 if(icon_exercise_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
