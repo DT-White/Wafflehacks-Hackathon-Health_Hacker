@@ -4,12 +4,12 @@ import pygame
 from file_reader import FileReader
 from journal import *
 import random
-# from Main_Menu_Screen import display_main_menu_screen
+from Main_Menu_Screen import display_main_menu_screen
 
 file_reader = FileReader()
 log_entries = file_reader.read_log()
 journal = Journal(log_entries)
-today_jentry = Jentry(404,404,404,404,404,404,404,404,404)
+today_jentry = Jentry(404,404,404,404,404,404,404,404,404,404)
 journal.add_to_jentries_map(today_jentry)
 track_menstruation = True
 trends = []
@@ -180,7 +180,4 @@ def get_downward_trend_message(value):
     if journal.is_downward_trend(value):
         trends.append("There's been a downward trend in your " + value + " recently.")
 
-#six_quit_screen()
-# run()
-for j in journal.get_jentries():
-    print(j)
+run()
