@@ -23,10 +23,6 @@ button_analyze = pygame.image.load("resource\\button_analyze.png").convert_alpha
 button_analyze_xy = (130,630)
 button_analyze_rect = button_analyze.get_rect(topleft = button_analyze_xy)
 
-button_journal = pygame.image.load("resource\\button_journal.png").convert_alpha() #load an image, convert alpha preserves transparency
-button_journal_xy = (600,630)
-button_journal_rect = button_analyze.get_rect(topleft = button_journal_xy)
-
 button_quit = pygame.image.load("resource\\button_back.png").convert_alpha() #load an image, convert alpha preserves transparency
 button_quit_xy = (1070,630)
 button_quit_rect = button_analyze.get_rect(topleft = button_quit_xy)
@@ -96,6 +92,14 @@ def render_text(message, xy):
 def display_main_menu_screen(random_quote, show_journal_button):
     clock = pygame.time.Clock()
     run = True
+    if(show_journal_button):
+        button_journal = pygame.image.load("resource\\button_journal.png").convert_alpha() #load an image, convert alpha preserves transparency   
+    else:
+        button_journal = pygame.image.load("resource\\button_journal_grey.png").convert_alpha() #load an image, convert alpha preserves transparency
+    
+    button_journal_xy = (600,630)
+    button_journal_rect = button_analyze.get_rect(topleft = button_journal_xy)
+
     while run: #main loop that runs every frame
         clock.tick(FPS) #controls the update speed of the program
         for event in pygame.event.get(): #Checks all pygame events every frame
@@ -107,7 +111,7 @@ def display_main_menu_screen(random_quote, show_journal_button):
             if event.type == pygame.MOUSEBUTTONDOWN: #If the user clicked 
                 if(button_analyze_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
                     return ("analyze")
-            if event.type == pygame.MOUSEBUTTONDOWN: #If the user clicked 
+            if event.type == pygame.MOUSEBUTTONDOWN and show_journal_button: #If the user clicked 
                 if(button_journal_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
                     return ("journal")
             if event.type == pygame.MOUSEBUTTONDOWN: #If the user clicked 
@@ -131,6 +135,6 @@ def display_main_menu_screen(random_quote, show_journal_button):
         pygame.display.flip()#This updates the screen to show all changes     
         
     pygame.quit()
-    
+
 if __name__ == "__main__":
-    display_main_menu_screen(random_quote, show_journal_button)
+    display_main_menu_screen("Placeholder random quote for testing purposes", False)
