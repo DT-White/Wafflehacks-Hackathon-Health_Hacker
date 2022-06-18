@@ -46,5 +46,3 @@ class FileReader:
         file.close()
         return quotes
 
-f = FileReader()
-print(f.read_log())
