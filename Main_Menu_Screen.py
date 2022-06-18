@@ -1,26 +1,33 @@
 import os
 import pygame
 
+from pathlib import Path
+
+pygame.init()
+
 SCREEN_HEIGHT = 864
 SCREEN_WIDTH = 1536
 WIN = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
 pygame.display.set_caption("main menu screen")
-
+cozyfont = pygame.font.Font('resource\CooperFiveOpti-Black.otf',  50)
 
 WHITE = (255,255,255)
 FPS = 60
 
-background_image = pygame.image.load(os.path.join('resource', 'mockup.png')) #load an image as a surface
+background_image = pygame.image.load("resource\\background.png") #load an image as a surface
 
-button_analyze = pygame.image.load(os.path.join('resource', 'button_analyze.png')).convert_alpha() #load an image, convert alpha preserves transparency
+text_bg = pygame.image.load("resource\\text_background.png").convert_alpha() #load an image, convert alpha preserves transparency
+
+
+button_analyze = pygame.image.load("resource\\button_analyze.png").convert_alpha() #load an image, convert alpha preserves transparency
 button_analyze_xy = (130,630)
 button_analyze_rect = button_analyze.get_rect(topleft = button_analyze_xy)
 
-button_journal = pygame.image.load(os.path.join('resource', 'button_journal.png')).convert_alpha() #load an image, convert alpha preserves transparency
+button_journal = pygame.image.load("resource\\button_journal.png").convert_alpha() #load an image, convert alpha preserves transparency
 button_journal_xy = (600,630)
 button_journal_rect = button_analyze.get_rect(topleft = button_journal_xy)
 
-button_quit = pygame.image.load(os.path.join('resource', 'button_back.png')).convert_alpha() #load an image, convert alpha preserves transparency
+button_quit = pygame.image.load("resource\\button_back.png").convert_alpha() #load an image, convert alpha preserves transparency
 button_quit_xy = (1070,630)
 button_quit_rect = button_analyze.get_rect(topleft = button_quit_xy)
 
@@ -36,7 +43,8 @@ def draw_bg(color):
 
 def draw_rect(color, rectangle):
     #pygame.draw.rect(surface, color, pygame.Rect(30, 30, 60, 60))
-    pygame.draw.rect(WIN, color, rectangle)
+    pygame.draw.rect(WIN, color, rectangle, 70 , 15)
+    pygame.draw.rect(WIN, color, rectangle, 2 , 3)
     
 
 def draw_line():
@@ -66,8 +74,16 @@ def display_main_menu_screen():
         draw_image(button_analyze, button_analyze_xy)
         draw_image(button_journal, button_journal_xy)
         draw_image(button_quit, button_quit_xy)
-        draw_rect(pygame.Color("#cbb397"), pygame.Rect(150,100,1200,150))
-        draw_rect(pygame.Color("#cbb397"), pygame.Rect(150,350,1200,150))
+        text_bg_xy = (110,90)
+        draw_image(text_bg, text_bg_xy)
+        quote = cozyfont.render("Placeholder text for quote", True, (255,255,255))
+        quote_xy = (150,100)
+        WIN.blit(quote, quote_xy)
+        text_bg_xy = (110,350)
+        draw_image(text_bg, text_bg_xy)
+        reminder = cozyfont.render("Placeholder text for quote", True, (255,255,255))
+        reminder_xy = (150,350)
+        WIN.blit(reminder, reminder_xy)
         #draw_line()
         
         pygame.display.flip()#This updates the screen to show all changes     
