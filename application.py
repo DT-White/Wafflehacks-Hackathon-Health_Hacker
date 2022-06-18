@@ -5,21 +5,22 @@ from Main_Menu_Screen import display_main_menu_screen
 import mood_screen
 from Analyze_Screen import display_analyze_screen
 from Mental_Health_Screen import display_health_screen
+from Quit_Screen import display_quit_screen
 
 file_reader = FileReader()
 log_entries = file_reader.read_log()
 journal = Journal(log_entries)
 today_jentry = Jentry(404,404,404,404,404,404,404,404,404,404)
 journal.add_to_jentries_map(today_jentry)
-track_menstruation = True
+#track_menstruation = True
 trends = []
 main_menu_loop = True
 jentry_done = False
 
 
 def run():
-    if log_entries == "EMPTY":
-        track_menstruation = welcome_screen()
+    # if log_entries == "EMPTY":
+    #     track_menstruation = welcome_screen()
     while main_menu_loop:
         main_menu_selection = zero_main_menu()
         if main_menu_selection == "analyze":
@@ -37,16 +38,16 @@ def run():
                 if entry_page_selection == "submit":
                     break
         quit_screen_selection = six_quit_screen()
-        if quit_screen_selection == "quit":
+        if quit_screen_selection != "back":
             break
 
 
     
 
-def welcome_screen():
-    #display welcome
-    #ask about menstruation
-    return #true or false
+# def welcome_screen():
+#     #display welcome
+#     #ask about menstruation
+#     return #true or false
 
 def zero_main_menu():
     quote = random.choice(file_reader.read_quotes())
@@ -192,9 +193,9 @@ def six_quit_screen():
         reminder_or_quote = "Don't forget to log your journal entry for today!"
     else:
         reminder_or_quote = random.choice(file_reader.read_quotes())
-    #return display_quit_screen(trend_message, reminder_or_quote)
+    return display_quit_screen(trend_message, reminder_or_quote)
 
-    #display_quit_screen(trend_message, reminder_or_quote)
+    return display_quit_screen(trend_message, reminder_or_quote)
     #BUTTONS --> {Bottom} of the screen::
         # a [Back] button (go to screen one --> main menu)
         # and a [Quit] button (which closes the application)
