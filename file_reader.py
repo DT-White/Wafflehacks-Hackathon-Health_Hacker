@@ -2,7 +2,9 @@ from pathlib import Path
 
 class FileReader:
 
-    
+    def __init__(self) -> None:
+        pass
+
     __track_menstruation = False
 
     def read_log(self):
@@ -14,7 +16,6 @@ class FileReader:
         if not menstruation_line:
             return "EMPTY"
         self.__track_menstruation = menstruation_line.split("|")[0] == 'True'
-        print(self.__track_menstruation)
         file.readline()
         jentries = []
         log_entry = file.readline()
@@ -30,14 +31,12 @@ class FileReader:
 
     def read_quotes(self):
         __p = Path(__file__)
-        __filepath = str(__p.parent.absolute())
-        file = open(__filepath + "\daily_quotes.txt", "r")
+        __filepath = str(__p.parent.absolute()) + "\Daily_Quotes.txt"
+        file = open(__filepath, "r", encoding="utf8")
         quotes = []
         quote_line = file.readline()
         while quote_line:
             quotes.append(quote_line)
-            quote_line = file.readline()
             file.readline()
+            quote_line = file.readline()
         file.close()
-        for quote in quotes:
-            print(quote)
