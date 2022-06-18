@@ -15,15 +15,14 @@ trends = []
 
 
 def run():
-    if log_entries == "EMPTY":
-        track_menstruation = welcome_screen()
-    main_menu_button = zero_main_menu()
-    if main_menu_button == "analyze":
-        five_analysis_screen()
-    elif main_menu_button == "journal":
-        one_mood_screen()
-    elif main_menu_button == "quit":
-        print(six_quit_screen())
+    # if log_entries == "EMPTY":
+    #     track_menstruation = welcome_screen()
+    # main_menu_button = zero_main_menu()
+    # if main_menu_button == "analyze":
+    #     five_analysis_screen()
+    # elif main_menu_button == "journal":
+    #     one_mood_screen()
+    six_quit_screen()
     
 
 def welcome_screen():
@@ -55,7 +54,7 @@ def one_mood_screen():
         #Button should be {between 5 and 6}
     #needs to also display "1", and "10" underneath the line of buttons
         #don't want to display all 10 numbers
-    pass
+    
 
 def two_social_energy_freetime_screen():
 
@@ -148,12 +147,13 @@ def five_analysis_screen():
         #display a red line starting with the day the period started and period ended
             #should account for a currently occuring period (ending at the present day)
                 #Do we want to have a symbol indicating an on-going period?
-    pass
+    
 
 def six_quit_screen():
     trend_message = "You're doing well! Keep up the good work!"
     reminder_or_quote = ""
-    if journal.check_lowscore("Mood"):
+    print(trend_message)
+    if journal.check_low_score("Mood"):
         trends.append("Looks like your mood has been low recently :\(")
         get_downward_trend_message("Social")
         get_downward_trend_message("Energy")
@@ -163,12 +163,14 @@ def six_quit_screen():
         get_downward_trend_message("Sleep")
     if len(trends) > 0:
         trend_message = random.choice(trends)
+    print(trend_message)
     if not datetime.today in journal.get_jentries():
         reminder_or_quote = "Don't forget to log your journal entry for today!"
     else:
         reminder_or_quote = random.choice(file_reader.read_quotes())
+    print(reminder_or_quote)
     #display_quit_screen(trend_message, reminder_or_quote)
-    return (trend_message, reminder_or_quote)
+    print (trend_message, reminder_or_quote)
     #BUTTONS --> {Bottom} of the screen::
         # a [Back] button (go to screen one --> main menu)
         # and a [Quit] button (which closes the application)
