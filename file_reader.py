@@ -39,5 +39,3 @@ class FileReader:
             quote_line = file.readline()
             file.readline()
         file.close()
-        for quote in quotes:
-            print(quote)
