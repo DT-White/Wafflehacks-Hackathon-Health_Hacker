@@ -7,9 +7,22 @@ class Journal:
     jentries = {}
 
     #Constructor
-    def __Journal__(self):        
-        for current_jentry in FileReader.read_log():
-            self.jentries = {[current_jentry[0]] : Jentry(current_jentry[1], current_jentry[2], current_jentry[3], current_jentry[4], current_jentry[5], current_jentry[6], current_jentry[7], current_jentry[8], current_jentry[9])}
+    def __init__(self, jentry_list):
+        for current_jentry in jentry_list:
+            date = current_jentry[0]
+            mood = current_jentry[1]
+            social = current_jentry[2]
+            energy = current_jentry[3]
+            freetime = current_jentry[4]
+            exercise = current_jentry[5]
+            diet = current_jentry[6]
+            sleep = current_jentry[7]
+            menstruation = current_jentry[8]
+            journal = current_jentry[9]
+
+            jentry = Jentry(mood, social, energy, freetime, exercise, diet, sleep, menstruation, journal)
+
+            self.jentries = {date : jentry}
     
     #Getters
     def get_is_menstruating(self):

@@ -87,3 +87,4 @@ class Jentry:
             return self.get_menstruation
         elif (value_to_get == "Journal"):
             return self.get_journal
+
