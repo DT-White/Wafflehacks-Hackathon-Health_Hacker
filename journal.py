@@ -36,7 +36,7 @@ class Journal:
     #Setters
     
     #Methods
-    def generate_score(self, value_to_check):
+    def __generate_score(self, value_to_check):
         today = datetime.now().strftime("%x")
         yesterday = today - timedelta(days= 1)
         two_day_ago = today - timedelta(days= 2)
@@ -48,11 +48,11 @@ class Journal:
         return tuple(day_one_score, day_two_score, day_three_score)
         
     def is_downward_trend(self, value_to_check):
-        day_one, day_two, day_three = self.generate_score(value_to_check)
+        day_one, day_two, day_three = self.__generate_score(value_to_check)
         return day_one < day_two and day_two < day_three
 
     def check_lowscore(self, value_to_check):
-        day_one, day_two, day_three = self.generate_score(value_to_check)
+        day_one, day_two, day_three = self.__generate_score(value_to_check)
             
         return (day_two + day_one + day_three) <= 3
 
