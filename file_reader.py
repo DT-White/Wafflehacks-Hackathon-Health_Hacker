@@ -20,10 +20,23 @@ class file_reader:
         while log_entry:
             jentries.append(log_entry.split("|"))
             log_entry = file.readline()
-        file.close
+        file.close()
         return jentries
 
     def track_menstruation(self):
         return self.track_menstruation
 
-    read_log()
+
+    def read_quotes(self):
+        __p = Path(__file__)
+        __filepath = str(__p.parent.absolute())
+        file = open(__filepath + "\daily_quotes.txt", "r")
+        quotes = []
+        quote_line = file.readline()
+        while quote_line:
+            quotes.append(quote_line)
+            quote_line = file.readline()
+            file.readline()
+        file.close()
+        for quote in quotes:
+            print(quote)
