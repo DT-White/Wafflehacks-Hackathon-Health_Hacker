@@ -1,7 +1,7 @@
 import pygame
 import datetime
 
-class jentry:
+class Jentry:
     #Variables
     today = datetime.datetime.now().strftime("%x")
     mood = 0
