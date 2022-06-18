@@ -77,7 +77,7 @@ def one_mood_screen():
 
 def two_social_energy_freetime_screen():
     #pass today jentry
-    return display_health_screen()
+    return display_health_screen(today_jentry)
     #do the following each for "Social", "Energy", "Freetime":
         #loop 4 times to display following:
             #A box with [i] <-- iterates {0 through 3}
