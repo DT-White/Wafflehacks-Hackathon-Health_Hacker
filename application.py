@@ -1,4 +1,9 @@
-import pygame;
+import pygame
+
+def run():
+#construct application for user
+    #if first time (no log) --> prompt menstruating?
+    zero_main_menu
 
 def zero_main_menu():
     #display quote of the day --> randomly generated from list of about 50 quotes
@@ -65,8 +70,12 @@ def three_exercise_diet_sleep_screen():
 def four_journal_screen():
     #display empty text box to accept user input
     #display menstruation [blood.png] button
+        #if user menstruates, display button
+            #else 
         #button should be a boolean to indicate that user is either currently on or off period (bleeding or not)
     #display [Submit] journal button (parses/logs data, goes to screen **ZERO** the main menu screen)
+
+        #jentry called -> data parsed here
 
     #BUTTONS --> top of the screen:
         # [Mental Health] tab (screen two)
