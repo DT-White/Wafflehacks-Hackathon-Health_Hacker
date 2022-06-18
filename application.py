@@ -11,6 +11,15 @@ log_entries = file_reader.read_log()
 journal = Journal(log_entries)
 track_menstruation = True
 trends = []
+today_mood = 0
+today_social = 0
+today_energy = 0
+today_freetime = 0
+today_exercise = 0
+today_diet = 0
+today_sleep = 0
+today_menstruation = False
+today_journal = ""
 
 def run():
     if log_entries == "EMPTY":
@@ -35,6 +44,8 @@ def zero_main_menu():
         #go to [Quit] screen (screen six)
 
 def one_mood_screen():
+    #today_mood = display_mood_screen()
+
     # Back [<-.png] button (to main_menu)
     # prints "How is your mood today on a scale of one to ten?" on screen (make it cozy <3)
     # loop 10 times to display following:
@@ -48,6 +59,8 @@ def one_mood_screen():
     pass
 
 def two_social_energy_freetime_screen():
+    
+
     #do the following each for "Social", "Energy", "Freetime":
         #loop 4 times to display following:
             #A box with [i] <-- iterates {0 through 3}
