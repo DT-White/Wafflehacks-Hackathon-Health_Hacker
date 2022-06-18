@@ -4,15 +4,15 @@ from datetime import datetime
 class Jentry:
     #Variables
     today = datetime.now().strftime("%x")
-    mood = 0
-    social = 0
-    energy = 0
-    freetime = 0
-    exercise = 0
-    diet = 0
-    sleep = 0
+    mood = 404
+    social = 404
+    energy = 404
+    freetime = 404
+    exercise = 404
+    diet = 404
+    sleep = 404
     menstruation = False
-    journal = ""
+    journal = 404
     
 
     #Constructor
@@ -60,7 +60,28 @@ class Jentry:
         return self.journal
     
     #Setters
-    
+    def set_value(self, value_to_set, new_value):
+        if (value_to_set == "Date"):
+            self.date = new_value
+        elif (value_to_set == "Mood"):
+            self.mood =new_value
+        elif (value_to_set == "Social"):
+            self.social = new_value
+        elif (value_to_set == "Energy"):
+            self.energy = new_value
+        elif (value_to_set == "Freetime"):
+            self.freetime = new_value
+        elif (value_to_set == "Energy"):
+            self.energy = new_value
+        elif (value_to_set == "Diet"):
+            self.diet = new_value
+        elif (value_to_set == "Sleep"):
+            self.sleep = new_value
+        elif (value_to_set == "Menstruation"):
+            self.menstruation = new_value
+        elif (value_to_set == "Journal"):
+            self.journal = new_value
+
     #Methods
     def get_log(self):
         log = self.today + "|" + self.mood + "|" + self.social + "|" + self.energy + "|" + self.freetime + "|" + self.energy + "|" + self.diet + "|" + self.sleep + "|" + self.menstruation + "|" + self.journal
