@@ -66,8 +66,8 @@ def display_main_menu_screen():
         draw_image(button_analyze, button_analyze_xy)
         draw_image(button_journal, button_journal_xy)
         draw_image(button_quit, button_quit_xy)
-        draw_rect((100,100,100), pygame.Rect(150,100,1200,150))
-        draw_rect((100,100,100), pygame.Rect(150,350,1200,150))
+        draw_rect(pygame.Color("#cbb397"), pygame.Rect(150,100,1200,150))
+        draw_rect(pygame.Color("#cbb397"), pygame.Rect(150,350,1200,150))
         #draw_line()
         
         pygame.display.flip()#This updates the screen to show all changes     
