@@ -1,6 +1,6 @@
 from pathlib import Path
 
-class file_reader:
+class FileReader:
 
     
     __track_menstruation = False
