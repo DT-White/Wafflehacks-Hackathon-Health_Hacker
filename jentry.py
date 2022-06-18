@@ -91,23 +91,23 @@ class Jentry:
 
     def get_value(self, value_to_get):
         if (value_to_get == "Date"):
-            return self.get_date
+            return self.date
         elif (value_to_get == "Mood"):
-            return self.get_mood
+            return self.mood
         elif (value_to_get == "Social"):
-            return self.get_social
+            return self.social
         elif (value_to_get == "Energy"):
-            return self.get_energy
+            return self.energy
         elif (value_to_get == "Freetime"):
-            return self.get_freetime
+            return self.freetime
         elif (value_to_get == "Energy"):
-            return self.get_energy
+            return self.energy
         elif (value_to_get == "Diet"):
-            return self.get_diet
+            return self.diet
         elif (value_to_get == "Sleep"):
-            return self.get_sleep
+            return self.sleep
         elif (value_to_get == "Menstruation"):
-            return self.get_menstruation
+            return self.menstruation
         elif (value_to_get == "Journal"):
-            return self.get_journal
+            return self.journal
 

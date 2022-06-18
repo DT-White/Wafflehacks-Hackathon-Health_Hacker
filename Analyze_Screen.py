@@ -17,11 +17,7 @@ FPS = 60
 
 #testJentry = Jentry(mood, social, energy, freetime, exercise, diet, sleep, menstruation, journal)
 
-<<<<<<< HEAD
-#testJentry = Jentry(3, 3, 3, 3,3,3,3,False,"This Jentry is for testing")
-=======
 testJentry = Jentry("06/18/22",3, 3, 3, 3,3,3,3,False,"This Jentry is for testing")
->>>>>>> c42020604bb91ed9792a37f070e969c93d5fff44
 #testJournal = {,,,,,,}
 
 background_image = pygame.image.load("resource\\background.png") #load an image as a surface

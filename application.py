@@ -166,14 +166,11 @@ def six_quit_screen():
         get_downward_trend_message("Sleep")
     if len(trends) > 0:
         trend_message = random.choice(trends)
-    print(trend_message)
     if not datetime.today in journal.get_jentries():
         reminder_or_quote = "Don't forget to log your journal entry for today!"
     else:
         reminder_or_quote = random.choice(file_reader.read_quotes())
-    print(reminder_or_quote)
     #display_quit_screen(trend_message, reminder_or_quote)
-    print (trend_message, reminder_or_quote)
     #BUTTONS --> {Bottom} of the screen::
         # a [Back] button (go to screen one --> main menu)
         # and a [Quit] button (which closes the application)
@@ -184,3 +181,5 @@ def get_downward_trend_message(value):
         trends.append("There's been a downward trend in your " + value + " recently.")
 
 run()
+# j = journal.get_jentries()
+# print(list(j.keys()))

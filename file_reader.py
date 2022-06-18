@@ -18,7 +18,7 @@ class FileReader:
         if not menstruation_line:
             return "EMPTY"
         self.__track_menstruation = menstruation_line.split("|")[0] == 'True'
-        file.readline()
+        # file.readline()
         jentries = []
         log_entry = file.readline()
         while log_entry:
