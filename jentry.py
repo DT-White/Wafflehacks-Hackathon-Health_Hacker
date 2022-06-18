@@ -29,6 +29,9 @@ class Jentry:
         self.sleep = int(sleep)
         self.menstruation = bool(menstruation == "True")
         self.journal = str(journal)
+
+    def __str__(self):
+        return str(self.date) + "|" + str(self.mood) + "|" + str(self.social) + "|" + str(self.energy) + "|" + str(self.freetime) + "|" + str(self.energy) + "|" + str(self.diet) + "|" + str(self.sleep) + "|" + str(self.menstruation) + "|" + str(self.journal)
     
     #Getters
     def get_date(self):
@@ -73,8 +76,8 @@ class Jentry:
             self.energy = new_value
         elif (value_to_set == "Freetime"):
             self.freetime = new_value
-        elif (value_to_set == "Energy"):
-            self.energy = new_value
+        elif (value_to_set == "Exercise"):
+            self.exercise = new_value
         elif (value_to_set == "Diet"):
             self.diet = new_value
         elif (value_to_set == "Sleep"):
@@ -91,23 +94,23 @@ class Jentry:
 
     def get_value(self, value_to_get):
         if (value_to_get == "Date"):
-            return self.get_date
+            return self.date
         elif (value_to_get == "Mood"):
-            return self.get_mood
+            return self.mood
         elif (value_to_get == "Social"):
-            return self.get_social
+            return self.social
         elif (value_to_get == "Energy"):
-            return self.get_energy
+            return self.energy
         elif (value_to_get == "Freetime"):
-            return self.get_freetime
-        elif (value_to_get == "Energy"):
-            return self.get_energy
+            return self.freetime
+        elif (value_to_get == "Exercise"):
+            return self.exercise
         elif (value_to_get == "Diet"):
-            return self.get_diet
+            return self.diet
         elif (value_to_get == "Sleep"):
-            return self.get_sleep
+            return self.sleep
         elif (value_to_get == "Menstruation"):
-            return self.get_menstruation
+            return self.menstruation
         elif (value_to_get == "Journal"):
-            return self.get_journal
+            return self.journal
 

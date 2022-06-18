@@ -22,7 +22,7 @@ class Journal:
 
             jentry = Jentry(date, mood, social, energy, freetime, exercise, diet, sleep, menstruation, journal)
 
-            self.jentries.update({jentry.get_date : jentry})
+            self.jentries.update({str(jentry.get_date()) : jentry})
     
     #Getters
     def get_is_menstruating(self):
@@ -32,20 +32,26 @@ class Journal:
 
     def get_jentries(self):
         return self.jentries
+
+    def get_jentry(self,key):
+        if key in self.jentries.keys():
+            return self.jentries[key]
+        else:
+            return 0
     
     #Setters
     
     #Methods
     def __generate_score(self, value_to_check):
-        today = datetime.now().strftime("%x")
-        yesterday = (datetime.now() - timedelta(days= 1)).strftime("%x")
-        two_day_ago = (datetime.now() - timedelta(days= 2)).strftime("%x")
+        today = datetime.today().strftime("%x")
+        yesterday = (datetime.today() - timedelta(days= 1)).strftime("%x")
+        two_day_ago = (datetime.today() - timedelta(days= 2)).strftime("%x")
 
-        day_one_score = self.jentries[today].get_value(value_to_check)
-        day_two_score = self.jentries[yesterday].get_value(value_to_check)
-        day_three_score = self.jentries[two_day_ago].get_value(value_to_check)
+        day_one_score = int(self.jentries[today].get_value(value_to_check))
+        day_two_score = int(self.jentries[yesterday].get_value(value_to_check))
+        day_three_score = int(self.jentries[two_day_ago].get_value(value_to_check))
         
-        return tuple(day_one_score, day_two_score, day_three_score)
+        return (day_one_score, day_two_score, day_three_score)
         
     def is_downward_trend(self, value_to_check):
         day_one, day_two, day_three = self.__generate_score(value_to_check)

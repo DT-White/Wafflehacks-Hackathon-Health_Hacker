@@ -2,6 +2,10 @@ import os
 import pygame
 from jentry import Jentry
 from pathlib import Path
+from datetime import datetime
+from datetime import timedelta
+
+from journal import Journal
 
 pygame.init()
 
@@ -16,13 +20,30 @@ FPS = 60
 
 #testJentry = Jentry(mood, social, energy, freetime, exercise, diet, sleep, menstruation, journal)
 
-testJentry = Jentry(3, 3, 3, 3,3,3,3,False,"This Jentry is for testing")
-#testJournal = {,,,,,,}
+testJentry = Jentry("06/18/22",2, 1, 3, 1,3,2,3,False,"This Jentry is for testing")
+test_journal_jentries = ["06/18/22|10|1|1|2|0|3|2|False|more strings to test".split("|"),
+"06/17/22|8|1|1|2|0|3|2|False|test string for app".split("|"),
+"06/16/22|6|2|2|2|0|3|2|False|Might test string 1".split("|"),
+"06/15/22|4|1|3|1|0|3|3|True|Might test string 3".split("|"),
+"06/14/22|2|3|3|2|1|3|2|True|Might test string 4".split("|"),
+"06/13/22|0|3|2|3|2|3|1|True|Might test string 5".split("|"),
+"06/12/22|3|2|1|2|3|2|2|True|Might test string 6".split("|"),
+"06/11/22|2|1|3|2|3|2|1|True|Might test string 7".split("|"),
+"06/10/22|1|0|2|1|2|3|1|False|Might test string 8".split("|"),
+"06/09/22|1|1|1|2|0|3|2|False|Might delete this ap".split("|")]
+
+test_journal = Journal(test_journal_jentries)
+
 
 background_image = pygame.image.load("resource\\background.png") #load an image as a surface
 
 img_axis = pygame.image.load("resource\\axis_week.png").convert_alpha() #load an image, convert alpha preserves transparency
 axis_xy = (113,79)
+
+graph_data_point = pygame.image.load("resource\\graph_data_point.png").convert_alpha()
+graph_blue_bar = pygame.image.load("resource\\graph_bar_blue.png").convert_alpha()
+graph_green_bar = pygame.image.load("resource\\graph_bar_green.png").convert_alpha()
+graph_red_bar = pygame.image.load("resource\\graph_bar_red.png").convert_alpha()
 
 icon_period_s = pygame.image.load("resource\\icon_period_selected.png").convert_alpha() #load an image, convert alpha preserves transparency
 icon_period_u = pygame.image.load("resource\\icon_period_unselected.png").convert_alpha() #load an image, convert alpha preserves transparency
@@ -63,22 +84,22 @@ icon_sleep_u = pygame.image.load("resource\\icon_sleep_unselected.png").convert_
 icon_sleep_xy = (1394,432)
 icon_sleep_rect = icon_sleep_u.get_rect(topleft = icon_sleep_xy)
 
-icon_month_s = pygame.image.load("resource\\icon_month_selected.png").convert_alpha() #load an image, convert alpha preserves transparency
-icon_month_u = pygame.image.load("resource\\icon_month_unselected.png").convert_alpha() #load an image, convert alpha preserves transparency
-icon_month_xy = (1250,576)
-icon_month_rect = icon_month_u.get_rect(topleft = icon_month_xy)
+# icon_month_s = pygame.image.load("resource\\icon_month_selected.png").convert_alpha() #load an image, convert alpha preserves transparency
+# icon_month_u = pygame.image.load("resource\\icon_month_unselected.png").convert_alpha() #load an image, convert alpha preserves transparency
+# icon_month_xy = (1250,576)
+# icon_month_rect = icon_month_u.get_rect(topleft = icon_month_xy)
 
-icon_week_s = pygame.image.load("resource\\icon_week_selected.png").convert_alpha() #load an image, convert alpha preserves transparency
-icon_week_u = pygame.image.load("resource\\icon_week_unselected.png").convert_alpha() #load an image, convert alpha preserves transparency
-icon_week_xy = (1394,576)
-icon_week_rect = icon_week_u.get_rect(topleft = icon_week_xy)
+# icon_week_s = pygame.image.load("resource\\icon_week_selected.png").convert_alpha() #load an image, convert alpha preserves transparency
+# icon_week_u = pygame.image.load("resource\\icon_week_unselected.png").convert_alpha() #load an image, convert alpha preserves transparency
+# icon_week_xy = (1394,576)
+# icon_week_rect = icon_week_u.get_rect(topleft = icon_week_xy)
 
 icon_move_backward = pygame.image.load("resource\\icon_move_backward.png").convert_alpha() #load an image, convert alpha preserves transparency
-icon_move_backward_xy = (1250,720)
+icon_move_backward_xy = (1250,576)
 icon_move_backward_rect = icon_back_arrow.get_rect(topleft = icon_move_backward_xy)
 
 icon_move_forward = pygame.image.load("resource\\icon_move_forward.png").convert_alpha() #load an image, convert alpha preserves transparency
-icon_move_forward_xy = (1394,720)
+icon_move_forward_xy = (1394,576)
 icon_move_forward_rect = icon_back_arrow.get_rect(topleft = icon_move_forward_xy)
 
 def draw_image(image, xy):
@@ -100,58 +121,98 @@ def draw_line():
     pygame.draw.line(WIN, (0,0,0), (0,0), (600,100), 6)
 
 def display_navigation(stat_selected, timespan, period_selected):
-    if(period_selected):
-            draw_image(icon_period_s, icon_period_xy)
-    else:
-        draw_image(icon_period_u, icon_period_xy)
+    # if(period_selected):
+    #         draw_image(icon_period_s, icon_period_xy)
+    # else:
+    #     draw_image(icon_period_u, icon_period_xy)
 
     draw_image(icon_back_arrow, icon_back_arrow_xy)
 
-    if(stat_selected == "social"):
+    if(stat_selected == "Social"):
         draw_image(icon_social_s, icon_social_xy)
     else:
         draw_image(icon_social_u, icon_social_xy)
 
-    if(stat_selected == "exercise"):
+    if(stat_selected == "Exercise"):
         draw_image(icon_exercise_s, icon_exercise_xy)
     else:
         draw_image(icon_exercise_u, icon_exercise_xy)
-    if(stat_selected == "time"):
+    if(stat_selected == "Freetime"):
         draw_image(icon_time_s, icon_time_xy)
     else:
         draw_image(icon_time_u, icon_time_xy)
-    if(stat_selected == "diet"):
+    if(stat_selected == "Diet"):
         draw_image(icon_diet_s, icon_diet_xy)
     else:
         draw_image(icon_diet_u, icon_diet_xy)
-    if(stat_selected == "energy"):
+    if(stat_selected == "Energy"):
         draw_image(icon_energy_s, icon_energy_xy)
     else:
         draw_image(icon_energy_u, icon_energy_xy)
-    if(stat_selected == "sleep"):
+    if(stat_selected == "Sleep"):
         draw_image(icon_sleep_s, icon_sleep_xy)
     else:
         draw_image(icon_sleep_u, icon_sleep_xy)
-    if(timespan == "month"):
-        draw_image(icon_month_s, icon_month_xy)
-    else:
-        draw_image(icon_month_u, icon_month_xy)
-    if(timespan == "week"):
-        draw_image(icon_week_s, icon_week_xy)
-    else:
-        draw_image(icon_week_u, icon_week_xy)
+    # if(timespan == "Month"):
+    #     draw_image(icon_month_s, icon_month_xy)
+    # else:
+    #     draw_image(icon_month_u, icon_month_xy)
+    # if(timespan == "Week"):
+    #     draw_image(icon_week_s, icon_week_xy)
+    # else:
+    #     draw_image(icon_week_u, icon_week_xy)
     draw_image(icon_move_backward, icon_move_backward_xy)
     draw_image(icon_move_forward, icon_move_forward_xy)
 
-def graph_stat(stat_selected):
-    pass
+def graph_line(current_week):
+    #37/40
+    i = 0
+    for day in current_week:
+        draw_image(graph_data_point, ((179)+(151*i),(684)-(day.get_value("Mood")*62)))
+        i+=1
+    
 
-def display_analyze_screen():
+
+def graph_stat(stat_selected, current_week):
+    i=0
+    for day in current_week:
+        bars = day.get_value(stat_selected)
+        if(bars != 0):
+            xy = (123, 499)
+            draw_bar_graph(bars,(xy[0] + (152*i) ,xy[1]))
+        i += 1
+
+def draw_bar_graph(bars, xy):
+    if(bars == 1):
+        graph_bar = graph_red_bar
+    elif(bars == 2):
+        graph_bar = graph_green_bar
+    elif(bars == 3):
+        graph_bar=graph_blue_bar
+    for i in range(bars):
+        draw_image(graph_bar, (xy[0], xy[1]- (i*207)))
+
+def populate_week(journal):
+    #datetime.now().strftime("%x")
+    week = []
+    today = datetime.now()
+    for i in range(7):
+        week.append(journal.get_jentry(today.strftime("%x")))
+        today = today - timedelta(days = 1)
+    for each in week:
+        print(each)
+    week.reverse()
+    return week
+
+def display_analyze_screen(journal):
     clock = pygame.time.Clock()
     run = True
     stat_selected = ""
-    timespan = "week"
+    timespan = "Week"
     period_selected = False
+    current_week = populate_week(journal)
+
+
 
     while run: #main loop that runs every frame
         clock.tick(FPS) #controls the update speed of the program
@@ -165,31 +226,36 @@ def display_analyze_screen():
                 print(event.pos)
                 if(icon_period_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
                     period_selected = not period_selected
+                if(icon_back_arrow_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
+                    return "back"
                 if(icon_social_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    stat_selected = "social"
+                    stat_selected = "Social"
                 if(icon_exercise_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    stat_selected = "exercise"
+                    stat_selected = "Exercise"
                 if(icon_time_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    stat_selected = "time"
+                    stat_selected = "Freetime"
                 if(icon_diet_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    stat_selected = "diet"
+                    stat_selected = "Diet"
                 if(icon_energy_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    stat_selected = "energy"
+                    stat_selected = "Energy"
                 if(icon_sleep_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    stat_selected = "sleep"
-                if(icon_month_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    timespan = "month"
-                if(icon_week_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    timespan = "week"
+                    stat_selected = "Sleep"
+                # if(icon_month_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
+                #     timespan = "Month"
+                # if(icon_week_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
+                #     timespan = "Week"
                 
 
 
         draw_image(background_image, (0,0))
         ######### DISPLAY GRAPH ############
-        draw_image(img_axis, axis_xy)
+        
         if(stat_selected != ""):
-            graph_stat(stat_selected)
+            graph_stat(stat_selected, current_week)
+        draw_image(img_axis, axis_xy)
+        graph_line(current_week)
 
+        
 
         ######### DISPLAY NAVIGATION #########
         display_navigation(stat_selected, timespan, period_selected)
@@ -200,4 +266,15 @@ def display_analyze_screen():
     pygame.quit()
 
 if __name__ == "__main__":
-    display_analyze_screen()
+    display_analyze_screen(test_journal)
+
+
+# (1032, 708)
+# (879, 708)
+# (725, 708)
+# (575, 711)
+# (426, 708)
+# (270, 708)
+# (124, 707)
+
+#(152, 207) bar dimensions
