@@ -131,5 +131,6 @@ def display_main_menu_screen(random_quote, show_journal_button):
         pygame.display.flip()#This updates the screen to show all changes     
         
     pygame.quit()
-
-display_main_menu_screen("“You’ll find that education is just about the only thing lying around loose in this world, and it’s about the only thing a fellow can have as much of as he’s willing to haul away.” —John Graham", True)
+    
+if __name__ == "__main__":
+    display_main_menu_screen(random_quote, show_journal_button)
