@@ -49,12 +49,16 @@ class Journal:
         
     def is_downward_trend(self, value_to_check):
         day_one, day_two, day_three = self.__generate_score(value_to_check)
-        return day_one < day_two and day_two < day_three
+        if(day_three <=6):
+            return (day_one < day_two and day_two < day_three)
 
-    def check_lowscore(self, value_to_check):
+    def check_low_score(self, value_to_check):
         day_one, day_two, day_three = self.__generate_score(value_to_check)
-            
-        return (day_two + day_one + day_three) <= 3
+
+        if (value_to_check == "Mood"):
+            return (day_two + day_one + day_three) <= 12
+        else:
+            return (day_two + day_one + day_three) <= 3
 
     def downward_spiral(self, value_to_check): #for the memems
         return self.is_downward_trend(value_to_check) and self.check_lowscore(value_to_check)
