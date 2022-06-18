@@ -4,19 +4,29 @@ import pygame
 from file_reader import FileReader
 from journal import *
 import random
+from Main_Menu_Screen import display_main_menu_screen
 
 file_reader = FileReader()
-journal = NULL
-log_entries = "EMPTY"
+log_entries = file_reader.read_log()
+journal = Journal(log_entries)
+track_menstruation = True
 
+def run():
+    if log_entries == "EMPTY":
+        track_menstruation = welcome_screen()
+    zero_main_menu()
 
+def welcome_screen():
+    #display welcome
+    #ask about menstruation
+    return #true or false
 
 def zero_main_menu():
-    #display quote of the day --> randomly generated from list of about 50 quotes
     quote = random.choice(file_reader.read_quotes())
-    
-    #show health reminder --> based on data
-        #Randomly show ONE trend noticed at a time
+    show_journal_button = False
+    if not datetime.today in journal.get_jentries():
+        show_journal_button = True
+    display_main_menu_screen(quote, show_journal_button)
 
     #BUTTONS --> {BOTTOM} of the screen:
         #go to [Trends] screen (screen five)
@@ -128,9 +138,11 @@ def five_analysis_screen():
     pass
 
 def six_quit_screen():
+    trend_message = "You're doing well! Keep up the good work!"
+    trends = []
+    #if journal.check_lowscore(journal.)
     #Display trend analyses:
         #Only if there are trends to display
-            #Default should be "You're doing well! Keep up the good work!"
             #When no trend to display
             #Randomly show ONE trend noticed at a time
         #Display reminders -OR- quote of the day
@@ -142,13 +154,6 @@ def six_quit_screen():
         # and a [Quit] button (which closes the application)
     pass
 
-def run():
-    file_reader = FileReader()
-    log_entries = file_reader.read_log()
-    if log_entries == "EMPTY":
-        #prompt menstruating?
-        pass
-    journal = Journal(log_entries)
-    zero_main_menu()
+
 
 run()
