@@ -1,8 +1,8 @@
-from tkinter import W
 import pygame
-from pygame import display, image, mouse
+from pygame import display, image
 
 pygame.init()
+
 SCREEN_HEIGHT = 864
 SCREEN_WIDTH = 1536
 WIN = display.set_mode((0,0), pygame.FULLSCREEN)
@@ -17,6 +17,11 @@ background_image = image.load("resource\\background.png") #load an image as a su
 # {MOOD_BAR}
 mood_bar_image = pygame.image.load("resource\\bar_mood.png").convert_alpha()
 mood_bar_xy = (140,290)
+
+# {BACK_BUTTON}
+back_button_image = pygame.image.load("resource\\icon_back_arrow.png").convert_alpha()
+back_button_xy = (1392,0)
+back_button = back_button_image.get_rect(topleft = back_button_xy)
 
 button_list = []
 button_xy_list = []
@@ -87,12 +92,11 @@ def main():
             if event.type == pygame.MOUSEBUTTONDOWN: #If the user clicked 
                 for i in range(10):
                     if(button_list[i].collidepoint(event.pos)):
-                        #print(i + 1)
+                        print(i + 1)
                         return(str(i + 1))
 
-                # if(button_confirm.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                #     pygame.quit() #quit
-                #     exit() #terminate
+                if(back_button.collidepoint(event.pos)):
+                    return "back"
 
        
         draw_bg(WHITE)
@@ -100,12 +104,14 @@ def main():
         draw_image(mood_bar_image, mood_bar_xy)
         
         enter_mood_text = cozyfont.render("How do you feel today?", True, (255,255,255))
-        WIN.blit(enter_mood_text, (230, 90))
+        WIN.blit(enter_mood_text, (230, 550))
         on_scale_text = cozyfont.render("On a scale of 1 to 10", True, (255,255,255))
-        WIN.blit(on_scale_text, (260, 550))
+        WIN.blit(on_scale_text, (260, 90))
 
         for i in range(10):
             draw_image(button_image_list[i], button_xy_list[i])
+
+        draw_image(back_button_image, back_button_xy)
 
         for i in range(10):
             if(button_list[i].collidepoint(pygame.mouse.get_pos())):

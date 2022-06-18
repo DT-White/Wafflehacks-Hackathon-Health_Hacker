@@ -5,5 +5,6 @@
         "Jentry",
         "Opti",
         "pygame"
-    ]
+    ],
+    "python.pythonPath": "C:\\Users\\Student\\AppData\\Local\\Microsoft\\WindowsApps\\python3.9.exe"
 }

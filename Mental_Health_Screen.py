@@ -1,32 +1,102 @@
-import os
 import pygame
-
-from pathlib import Path
+from pygame import display, draw, image
+from jentry import Jentry
 
 pygame.init()
 
 SCREEN_HEIGHT = 864
 SCREEN_WIDTH = 1536
-WIN = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
-pygame.display.set_caption("main menu screen")
+WIN = display.set_mode((0,0), pygame.FULLSCREEN)
+display.set_caption("mental health screen")
 cozyfont = pygame.font.Font('resource\CooperFiveOpti-Black.otf',  36)
 
 WHITE = (255,255,255)
 FPS = 60
 
 background_image = pygame.image.load("resource\\background.png") #load an image as a surface
-
 text_bg = pygame.image.load("resource\\text_background.png").convert_alpha() #load an image, convert alpha preserves transparency
 
+# {MIND_BUTTON}
+mind_button_image = pygame.image.load("resource\\tab_mind_selected.png").convert_alpha() #load an image, convert alpha preserves transparency
+mind_button_xy = (40,30)
+mind_button = mind_button_image.get_rect(topleft = mind_button_xy)
 
-button_analyze = pygame.image.load("resource\\button_analyze.png").convert_alpha() #load an image, convert alpha preserves transparency
-button_analyze_xy = (130,630)
-button_analyze_rect = button_analyze.get_rect(topleft = button_analyze_xy)
+# {BODY_BUTTON}
+body_button_image = pygame.image.load("resource\\tab_body_unselected.png").convert_alpha() #load an image, convert alpha preserves transparency
+body_button_xy = (540,30)
+body_button = body_button_image.get_rect(topleft = body_button_xy)
 
-button_quit = pygame.image.load("resource\\button_back.png").convert_alpha() #load an image, convert alpha preserves transparency
-button_quit_xy = (1070,630)
-button_quit_rect = button_analyze.get_rect(topleft = button_quit_xy)
+# {JOURNAL_BUTTON}
+journal_button_image = pygame.image.load("resource\\tab_journal_unselected.png").convert_alpha() #load an image, convert alpha preserves transparency
+journal_button_xy = (1040,30)
+journal_button = journal_button_image.get_rect(topleft = journal_button_xy)
 
+# {ROW IDENTIFIERS}
+social_image = pygame.image.load("resource\\icon_social_unselected.png").convert_alpha()
+social_logo_xy = (40,240)
+energy_image = pygame.image.load("resource\\icon_energy_unselected.png").convert_alpha()
+energy_logo_xy = (40,440)
+time_image = pygame.image.load("resource\\icon_time_unselected.png").convert_alpha()
+time_logo_xy = (40,640)
+
+########################################################
+#               Number buttons here                    #
+########################################################
+
+social_buttons = []
+social_xy = []
+energy_buttons = []
+energy_xy = []
+time_buttons = []
+time_xy = []
+
+button_images_up = []
+
+# {BUTTON UP GRAPHICS}
+button_images_up.append(image.load("resource\\button_0_unselected.png").convert_alpha())
+button_images_up.append(image.load("resource\\button_1_unselected.png").convert_alpha())
+button_images_up.append(image.load("resource\\button_2_unselected.png").convert_alpha())
+button_images_up.append(image.load("resource\\button_3_unselected.png").convert_alpha())
+
+zero_button_down_image = image.load("resource\\button_0_selected.png").convert_alpha()
+one_button_down_image = image.load("resource\\button_1_selected.png").convert_alpha()
+two_button_down_image = image.load("resource\\button_2_selected.png").convert_alpha()
+three_button_down_image = image.load("resource\\button_3_selected.png").convert_alpha()
+
+# {SOCIAL BUTTONS [x] = 810, 990, 1170, 1350 --> [y] = 236 }
+social_xy.append((810,236))
+social_buttons.append(button_images_up[0].get_rect(topleft = social_xy[0]))
+social_xy.append((990,236))
+social_buttons.append(button_images_up[1].get_rect(topleft = social_xy[1]))
+social_xy.append((1170,236))
+social_buttons.append(button_images_up[2].get_rect(topleft = social_xy[2]))
+social_xy.append((1350,236))
+social_buttons.append(button_images_up[3].get_rect(topleft = social_xy[3]))
+
+# {ENERGY BUTTONS [x] = 810, 990, 1170, 1350 --> [y] = 436 }
+energy_xy.append((810,436))
+energy_buttons.append(button_images_up[0].get_rect(topleft = energy_xy[0]))
+energy_xy.append((990,436))
+energy_buttons.append(button_images_up[1].get_rect(topleft = energy_xy[1]))
+energy_xy.append((1170,436))
+energy_buttons.append(button_images_up[2].get_rect(topleft = energy_xy[2]))
+energy_xy.append((1350,436))
+energy_buttons.append(button_images_up[3].get_rect(topleft = energy_xy[3]))
+
+# {TIME BUTTONS [x] = 810, 990, 1170, 1350 --> [y] = 636 }
+time_xy.append((810,636))
+time_buttons.append(button_images_up[0].get_rect(topleft = time_xy[0]))
+time_xy.append((990,636))
+time_buttons.append(button_images_up[1].get_rect(topleft = time_xy[1]))
+time_xy.append((1170,636))
+time_buttons.append(button_images_up[2].get_rect(topleft = time_xy[2]))
+time_xy.append((1350,636))
+time_buttons.append(button_images_up[3].get_rect(topleft = social_xy[3]))
+
+# {BACK_BUTTON}
+# back_button_image = pygame.image.load("resource\\icon_back_arrow.png").convert_alpha()
+# back_button_xy = (1389,18)
+# back_button = back_button_image.get_rect(topleft = back_button_xy)
 
 
 def draw_image(image, xy):
@@ -36,19 +106,37 @@ def draw_image(image, xy):
 def draw_bg(color):
     WIN.fill(color) #fill the window with color, color is a tuple variable (R,G,B)
 
+def __button_pushed(button_value):
+    match button_value:
+        case "s0":
+            return ("Social", 0)
+        case "s1":
+            return ("Social", 1)
+        case "s2":
+            return ("Social", 2)
+        case "s3":
+            return ("Social", 3)
 
-def draw_rect(color, rectangle):
-    #pygame.draw.rect(surface, color, pygame.Rect(30, 30, 60, 60))
-    pygame.draw.rect(WIN, color, rectangle, 70 , 15)
-    pygame.draw.rect(WIN, color, rectangle, 2 , 3)
-    
+        case "e0":
+            return ("Energy", 0)
+        case "e1":
+            return ("Energy", 1)
+        case "e2":
+            return ("Energy", 2)
+        case "e3":
+            return ("Energy", 3)
+        
+        case "t0":
+            return ("Time", 0)
+        case "t1":
+            return ("Time", 1)
+        case "t2":
+            return ("Time", 2)
+        case "t3":
+            return ("Time", 3)
+        
 
-def draw_line():
-    #pygame.draw.rect(surface, color, pygame.Rect(30, 30, 60, 60))
-    pygame.draw.line(WIN, (0,0,0), (0,0), (600,100), 6)
-
-
-def display_health_screen():
+def display_health_screen(today_jentry):
     clock = pygame.time.Clock()
     run = True
 
@@ -57,16 +145,54 @@ def display_health_screen():
         for event in pygame.event.get(): #Checks all pygame events every frame
             if event.type == pygame.QUIT: #If the user quits the program
                 run = False #Stop running
+
             if event.type == pygame.QUIT or ( event.type == pygame.KEYDOWN and event.key == pygame.K_1): #If the player clicks X button, or presses keyboard 1 (the 1 key)
                 pygame.quit() #quit
                 exit() #terminate
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                for i in range(4):
+                    if(social_buttons[i].collidepoint(event.pos)):
+                        return today_jentry.set_value(__button_pushed("s" + str(i)))
+
+                for i in range(4):
+                    if(energy_buttons[i].collidepoint(event.pos)):
+                        return today_jentry.set_value(__button_pushed("e" + str(i)))
+
+                for i in range(4):
+                    if(time_buttons[i].collidepoint(event.pos)):
+                        return today_jentry.set_value(__button_pushed("t" + str(i)))
+
             # if event.type == pygame.MOUSEBUTTONDOWN: #If the user clicked 
-            #     if(button_analyze_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-            #         return ("analyze")
+            #     if(back_button_image.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
+            #         return
+
+            # --->    [[[today_jentry_to_update.set_value("Energy", 2)]]]
 
 
         draw_image(background_image, (0,0))
-        pygame.display.flip()#This updates the screen to show all changes     
+        draw_image(mind_button_image, mind_button_xy)
+        draw_image(body_button_image, body_button_xy)
+        draw_image(journal_button_image, journal_button_xy)
+
+        # draw social
+        for i in range(4):
+            draw_image(button_images_up[i], social_xy[i])
+
+        #draw energy
+        for i in range(4):
+            draw_image(button_images_up[i], energy_xy[i])
+        
+        #draw time
+        for i in range(4):
+            draw_image(button_images_up[i], time_xy[i])
+
+        draw_image(social_image, social_logo_xy)
+        draw_image(energy_image, energy_logo_xy)
+        draw_image(time_image, time_logo_xy)
+        #draw_image(back_button_image, back_button_xy)
+        
+        pygame.display.flip() # This updates the screen to show all changes     
         
     pygame.quit()
 
