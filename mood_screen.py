@@ -14,12 +14,6 @@ FPS = 60
 
 background_image = image.load("resource\\background.png") #load an image as a surface
 
- #load an image, convert alpha preserves transparency
- # {CHECK_BUTTON}
-check_image = pygame.image.load("resource\\button_mood_submit.png").convert_alpha()
-confirm_button_xy = (645,550)
-button_confirm = check_image.get_rect(topleft = confirm_button_xy)
-
 # {MOOD_BAR}
 mood_bar_image = pygame.image.load("resource\\bar_mood.png").convert_alpha()
 mood_bar_xy = (140,290)
@@ -94,7 +88,7 @@ def main():
                 for i in range(10):
                     if(button_list[i].collidepoint(event.pos)):
                         #print(i + 1)
-                        return(i + 1)
+                        return(str(i + 1))
 
                 # if(button_confirm.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
                 #     pygame.quit() #quit
@@ -103,8 +97,12 @@ def main():
        
         draw_bg(WHITE)
         draw_image(background_image, (0,0))
-        draw_image(check_image, confirm_button_xy)
         draw_image(mood_bar_image, mood_bar_xy)
+        
+        enter_mood_text = cozyfont.render("How do you feel today?", True, (255,255,255))
+        WIN.blit(enter_mood_text, (230, 90))
+        on_scale_text = cozyfont.render("On a scale of 1 to 10", True, (255,255,255))
+        WIN.blit(on_scale_text, (260, 550))
 
         for i in range(10):
             draw_image(button_image_list[i], button_xy_list[i])
