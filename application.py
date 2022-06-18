@@ -139,7 +139,7 @@ def four_journal_screen():
 
 def five_analysis_screen():
     #pass journal object
-    display_analyze_screen()
+    display_analyze_screen(journal)
     
     #Display graph:
         #X-axis is date
