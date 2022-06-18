@@ -20,9 +20,9 @@ class Journal:
             menstruation = current_jentry[8]
             journal = current_jentry[9]
 
-            jentry = Jentry(mood, social, energy, freetime, exercise, diet, sleep, menstruation, journal)
+            jentry = Jentry(date, mood, social, energy, freetime, exercise, diet, sleep, menstruation, journal)
 
-            self.jentries = {date : jentry}
+            self.jentries.update({jentry.get_date : jentry})
     
     #Getters
     def get_is_menstruating(self):
@@ -82,4 +82,4 @@ class Journal:
         return monthly_sum/30
 
     def add_to_jentries_map(self, jentry):
-       self.jentries = {jentry.get_date() : jentry}
+       self.jentries.update({jentry.get_date() : jentry})

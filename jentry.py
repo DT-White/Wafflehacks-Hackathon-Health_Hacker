@@ -3,6 +3,7 @@ from datetime import datetime
 
 class Jentry:
     #Variables
+    date = 404
     today = 404
     mood = 404
     social = 404
@@ -16,7 +17,8 @@ class Jentry:
     
 
     #Constructor
-    def __init__(self, mood, social, energy, freetime, exercise, diet, sleep, menstruation, journal):
+    def __init__(self, date, mood, social, energy, freetime, exercise, diet, sleep, menstruation, journal):
+        self.date = date
         self.today = datetime.now().strftime("%x") # --> MM/dd/yy
         self.mood = int(mood)
         self.social = int(social)
@@ -30,7 +32,7 @@ class Jentry:
     
     #Getters
     def get_date(self):
-        return self.today
+        return self.date
 
     def get_mood(self):
         return self.mood
