@@ -16,7 +16,7 @@ class Jentry:
     
 
     #Constructor
-    def __Jentry__(self, mood, social, energy, freetime, exercise, diet, sleep, menstruation, journal):
+    def __init__(self, mood, social, energy, freetime, exercise, diet, sleep, menstruation, journal):
         self.today = datetime.now().strftime("%x") # --> MM/dd/yy
         self.mood = int(mood)
         self.social = int(social)
