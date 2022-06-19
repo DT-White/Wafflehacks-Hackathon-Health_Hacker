@@ -1,9 +1,4 @@
 True|Tracking Menstruation
-<<<<<<< HEAD
-=======
-06/17/22|5|1|1|2|0|3|2|False|Might delete this ap
->>>>>>> 22131faf076e9222e140b56bbd0b3cb839889465
-06/16/22|5|1|1|2|0|3|2|False|test string for app
 06/15/22|6|2|2|2|0|3|2|False|Might test string 1
 06/14/22|5|1|3|1|0|3|3|True|Might test string 3
 06/13/22|5|3|3|2|1|3|2|True|Might test string 4
