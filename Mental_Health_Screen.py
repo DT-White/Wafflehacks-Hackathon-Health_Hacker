@@ -1,5 +1,5 @@
 import pygame
-from pygame import display, image
+from pygame import display, image, mouse
 from jentry import Jentry
 
 pygame.init()
@@ -15,7 +15,7 @@ WHITE = (255,255,255)
 FPS = 60
 
 background_image = pygame.image.load("resource\\background.png") #load an image as a surface
-text_bg = pygame.image.load("resource\\text_background.png").convert_alpha() #load an image, convert alpha preserves transparency
+journal_bg = pygame.image.load("resource\\journal_background.png").convert_alpha() #load an image, convert alpha preserves transparency
 
 # {MIND_BUTTON}
 mind_button_image = pygame.image.load("resource\\tab_mind_selected.png").convert_alpha() #load an image, convert alpha preserves transparency
@@ -107,6 +107,25 @@ time_buttons.append(button_images_up[3].get_rect(topleft = time_xy[3]))
 def draw_image(image, xy):
     WIN.blit(image, xy) #Screen.blit(image, (x,y))
 
+def render_text(message, xy, line_length):
+    lines = [""]
+    index = 0
+    running_total = 0
+    for word in message.split():
+        if(running_total + len(word) < line_length):
+            lines[index] += word + " "
+            running_total += len(word)+1
+        else:
+            index += 1
+            lines.append("")
+            lines[index] += word + " "
+            running_total = len(word)+1
+    x = xy[0]
+    y = xy[1]
+    for each in lines:
+        words = cozyfont.render(each, True, (255,255,255))
+        WIN.blit(words, (x,y))
+        y += 40
 
 def draw_bg(color):
     WIN.fill(color) #fill the window with color, color is a tuple variable (R,G,B)
@@ -153,7 +172,7 @@ def display_mental_screen(today_jentry):
                     if(time_buttons[i].collidepoint(event.pos)):
                         time_selection = True
                         time_value = i
-                        today_jentry.set_value("Time", i)
+                        today_jentry.set_value("Freetime", i)
 
 
 
@@ -202,14 +221,28 @@ def display_mental_screen(today_jentry):
 
         for i in range(10):
             if(social_logo_button.collidepoint(pygame.mouse.get_pos())):
-                words = cozyfont.render("How much social interaction have you had today?", True, (255,255,255))
-                WIN.blit(words, pygame.mouse.get_pos())
+                mouse_xy = pygame.mouse.get_pos()
+                mouse_xy = ((mouse_xy[0] + 40), (mouse_xy[1] + 10))
+
+                WIN.blit(pygame.transform.scale(journal_bg, (530, 180)), pygame.mouse.get_pos())
+                words = cozyfont.render(render_text("How much social interaction have you had today?", mouse_xy, 20), True, (255,255,255))
+                WIN.blit(words, mouse_xy)
+
             if(energy_logo_button.collidepoint(pygame.mouse.get_pos())):
-                words = cozyfont.render("How much energy do you have today?", True, (255,255,255))
-                WIN.blit(words, pygame.mouse.get_pos())
+                mouse_xy = pygame.mouse.get_pos()
+                mouse_xy = ((mouse_xy[0] + 40), (mouse_xy[1] + 10))
+
+                WIN.blit(pygame.transform.scale(journal_bg, (615, 140)), pygame.mouse.get_pos())
+                words = cozyfont.render(render_text("How much energy do you have today?", mouse_xy, 20), True, (255,255,255))
+                WIN.blit(words, mouse_xy)
+
             if(time_logo_button.collidepoint(pygame.mouse.get_pos())):
-                words = cozyfont.render("How much free time have you had today?", True, (255,255,255))
-                WIN.blit(words, pygame.mouse.get_pos())
+                mouse_xy = pygame.mouse.get_pos()
+                mouse_xy = ((mouse_xy[0] + 40), (mouse_xy[1] + 10))
+
+                WIN.blit(pygame.transform.scale(journal_bg, (600, 140)), pygame.mouse.get_pos())
+                words = cozyfont.render(render_text("How much free time have you had today?", mouse_xy, 20), True, (255,255,255))
+                WIN.blit(words, mouse_xy)
 
         pygame.display.flip() # This updates the screen to show all changes     
         

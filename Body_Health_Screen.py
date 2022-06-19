@@ -1,5 +1,6 @@
 import pygame
 from pygame import display, image
+from Main_Menu_Screen import render_text
 from jentry import Jentry
 
 pygame.init()
@@ -131,7 +132,7 @@ def display_body_screen(today_jentry):
                 exit() #terminate
 
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if(body_button.collidepoint(event.pos)):
+                if(mind_button.collidepoint(event.pos)):
                     return "mind"
 
                 if(journal_button.collidepoint(event.pos)):
@@ -202,13 +203,13 @@ def display_body_screen(today_jentry):
 
         for i in range(10):
             if(exercise_logo_button.collidepoint(pygame.mouse.get_pos())):
-                words = cozyfont.render("How much exercise have you had today?", True, (255,255,255))
+                words = cozyfont.render(render_text("How much exercise have you had today?", pygame.mouse.get_pos(), 25), True, (255,255,255))
                 WIN.blit(words, pygame.mouse.get_pos())
             if(diet_logo_button.collidepoint(pygame.mouse.get_pos())):
-                words = cozyfont.render("How healthy did you eat today?", True, (255,255,255))
+                words = cozyfont.render(render_text("How healthy did you eat today?", pygame.mouse.get_pos(), 25), True, (255,255,255))
                 WIN.blit(words, pygame.mouse.get_pos())
             if(sleep_logo_button.collidepoint(pygame.mouse.get_pos())):
-                words = cozyfont.render("How much sleep have you gotten today?", True, (255,255,255))
+                words = cozyfont.render(render_text("How much sleep have you gotten today?", pygame.mouse.get_pos(), 25), True, (255,255,255))
                 WIN.blit(words, pygame.mouse.get_pos())
 
         pygame.display.flip() # This updates the screen to show all changes     
