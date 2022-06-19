@@ -202,8 +202,6 @@ def populate_week(journal):
     for i in range(7):
         week.append(journal.get_jentry(today.strftime("%x")))
         today = today - timedelta(days = 1)
-    for each in week:
-        print(each)
     week.reverse()
     return week
 
@@ -226,7 +224,7 @@ def display_analyze_screen(journal):
                 pygame.quit() #quit
                 exit() #terminate
             if event.type == pygame.MOUSEBUTTONDOWN: #If the user clicked 
-                print(event.pos)
+                #print(event.pos)
                 if(icon_period_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
                     period_selected = not period_selected
                 if(icon_back_arrow_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
