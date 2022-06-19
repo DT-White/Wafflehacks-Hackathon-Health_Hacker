@@ -17,7 +17,7 @@ journal = Journal(log_entries)
 if datetime.today().strftime("%x") in journal.get_jentries():
     today_jentry = journal.get_jentry(datetime.today().strftime("%x"))
 else:
-    today_jentry = Jentry(404,404,404,404,404,404,404,404,404,"")
+    today_jentry = Jentry(datetime.now().strftime("%x"),404,404,404,404,404,404,404,404,"")
     journal.add_to_jentries_map(today_jentry)
 #track_menstruation = True
 trends = []
