@@ -145,7 +145,6 @@ def display_navigation(stat_selected, timespan, period_selected):
     draw_image(icon_move_forward, icon_move_forward_xy)
 
 def graph_line(current_week):
-    print("week: ", current_week)
     #37/40 
     x = []
     y = []
@@ -204,7 +203,6 @@ def populate_week(journal):
         week.append(journal.get_jentry(today.strftime("%x")))
         today = today - timedelta(days = 1)
     for each in week:
-        print("each in week ", each)
     week.reverse()
     return week
 
@@ -227,7 +225,7 @@ def display_analyze_screen(journal):
                 pygame.quit() #quit
                 exit() #terminate
             if event.type == pygame.MOUSEBUTTONDOWN: #If the user clicked 
-                print(event.pos)
+                #print(event.pos)
                 if(icon_period_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
                     period_selected = not period_selected
                 if(icon_back_arrow_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
