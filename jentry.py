@@ -69,19 +69,19 @@ class Jentry:
         if (value_to_set == "Date"):
             self.date = new_value
         elif (value_to_set == "Mood"):
-            self.mood =new_value
+            self.mood = int(new_value)
         elif (value_to_set == "Social"):
-            self.social = new_value
+            self.social = int(new_value)
         elif (value_to_set == "Energy"):
-            self.energy = new_value
+            self.energy = int(new_value)
         elif (value_to_set == "Freetime"):
-            self.freetime = new_value
+            self.freetime = int(new_value)
         elif (value_to_set == "Exercise"):
-            self.exercise = new_value
+            self.exercise = int(new_value)
         elif (value_to_set == "Diet"):
-            self.diet = new_value
+            self.diet = int(new_value)
         elif (value_to_set == "Sleep"):
-            self.sleep = new_value
+            self.sleep = int(new_value)
         elif (value_to_set == "Menstruation"):
             self.menstruation = new_value
         elif (value_to_set == "Journal"):

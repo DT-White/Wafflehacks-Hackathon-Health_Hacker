@@ -198,13 +198,15 @@ def draw_bar_graph(bars, xy):
 def populate_week(journal):
     #datetime.now().strftime("%x")
     week = []
-    today = datetime.now()
+    today = datetime.today()
     for i in range(7):
         print(journal.get_jentry(today.strftime("%x")))
         if(journal.has_jentry(today.strftime("%x"))):
-            week.append(journal.get_jentry(today.strftime("%x")))
-        else:
-            week.append(Jentry(today.strftime("%x"),0,0,0,0,0,0,0,False,"No entry for today"))
+            print("got past first if")
+            if(journal.get_sum(journal.get_jentry(today.strftime("%x"))) < 100 ):
+                week.append(journal.get_jentry(today.strftime("%x")))
+            else:
+                week.append(Jentry(today.strftime("%x"),0,0,0,0,0,0,0,False,"No entry for today"))
         today = today - timedelta(days = 1)
     week.reverse()
     return week
