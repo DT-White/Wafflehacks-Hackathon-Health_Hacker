@@ -153,7 +153,7 @@ def display_mental_screen(today_jentry):
                     if(time_buttons[i].collidepoint(event.pos)):
                         time_selection = True
                         time_value = i
-                        today_jentry.set_value("Time", i)
+                        today_jentry.set_value("Freetime", i)
 
 
 

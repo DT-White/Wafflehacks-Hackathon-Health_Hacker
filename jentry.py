@@ -89,7 +89,7 @@ class Jentry:
 
     #Methods
     def get_log(self):
-        log = self.today + "|" + self.mood + "|" + self.social + "|" + self.energy + "|" + self.freetime + "|" + self.energy + "|" + self.diet + "|" + self.sleep + "|" + self.menstruation + "|" + self.journal
+        log = str(self.today) + "|" + str(self.mood) + "|" + str(self.social) + "|" + str(self.energy) + "|" + str(self.freetime) + "|" + str(self.energy) + "|" + str(self.diet) + "|" + str(self.sleep) + "|" + str(self.menstruation) + "|" + str(self.journal)
         return log
 
     def get_value(self, value_to_get):
