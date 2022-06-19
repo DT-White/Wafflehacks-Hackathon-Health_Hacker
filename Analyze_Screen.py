@@ -145,6 +145,7 @@ def display_navigation(stat_selected, timespan, period_selected):
     draw_image(icon_move_forward, icon_move_forward_xy)
 
 def graph_line(current_week):
+    print("week: ", current_week)
     #37/40 
     x = []
     y = []
@@ -203,7 +204,7 @@ def populate_week(journal):
         week.append(journal.get_jentry(today.strftime("%x")))
         today = today - timedelta(days = 1)
     for each in week:
-        print(each)
+        print("each in week ", each)
     week.reverse()
     return week
 
