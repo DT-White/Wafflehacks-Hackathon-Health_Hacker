@@ -16,16 +16,19 @@ journal.add_to_jentries_map(today_jentry)
 #track_menstruation = True
 trends = []
 main_menu_loop = True
-jentry_done = False
+
 
 
 def run():
+    jentry_done = False
     # if log_entries == "EMPTY":
     #     track_menstruation = welcome_screen()
     while main_menu_loop:
         main_menu_selection = zero_main_menu()
         if main_menu_selection == "analyze":
-            five_analysis_screen()
+            analysis_page_selection = five_analysis_screen()
+            if analysis_page_selection == "back":
+                continue
         elif main_menu_selection == "journal":
             one_mood_screen()
             entry_page_selection = "mind"
