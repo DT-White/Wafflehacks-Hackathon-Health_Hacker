@@ -1,5 +1,6 @@
 import pygame
-from pygame import display, image, mouse
+from pygame import display, image
+from Main_Menu_Screen import render_text
 from jentry import Jentry
 
 pygame.init()
@@ -14,8 +15,8 @@ cozyfont = pygame.font.Font('resource\CooperFiveOpti-Black.otf', 42)
 WHITE = (255,255,255)
 FPS = 60
 
-background_image = pygame.image.load("resource\\background.png") #load an image as a surface
-journal_bg = pygame.image.load("resource\\journal_background.png").convert_alpha() #load an image, convert alpha preserves transparency
+background_image = pygame.image.load("resource\\background.png")
+hover_bg = pygame.image.load("resource\\hover_background.png").convert_alpha()
 
 # {MIND_BUTTON}
 mind_button_image = pygame.image.load("resource\\tab_mind_selected.png").convert_alpha() #load an image, convert alpha preserves transparency
@@ -139,6 +140,18 @@ def display_mental_screen(today_jentry):
     time_selection = False
     social_value = 0
 
+    if(today_jentry.get_value("Social") != 404):
+        social_selection = True
+        social_value = today_jentry.get_value("Social")
+
+    if(today_jentry.get_value("Energy") != 404):
+        energy_selection = True
+        energy_value = today_jentry.get_value("Energy")
+
+    if(today_jentry.get_value("Freetime") != 404):
+        time_selection = True
+        time_value = today_jentry.get_value("Freetime")
+
     while run: #main loop that runs every frame
         clock.tick(FPS) #controls the update speed of the program
         for event in pygame.event.get(): #Checks all pygame events every frame
@@ -224,7 +237,7 @@ def display_mental_screen(today_jentry):
                 mouse_xy = pygame.mouse.get_pos()
                 mouse_xy = ((mouse_xy[0] + 40), (mouse_xy[1] + 10))
 
-                WIN.blit(pygame.transform.scale(journal_bg, (530, 180)), pygame.mouse.get_pos())
+                WIN.blit(pygame.transform.scale(hover_bg, (545, 165)), pygame.mouse.get_pos())
                 words = cozyfont.render(render_text("How much social interaction have you had today?", mouse_xy, 20), True, (255,255,255))
                 WIN.blit(words, mouse_xy)
 
@@ -232,7 +245,7 @@ def display_mental_screen(today_jentry):
                 mouse_xy = pygame.mouse.get_pos()
                 mouse_xy = ((mouse_xy[0] + 40), (mouse_xy[1] + 10))
 
-                WIN.blit(pygame.transform.scale(journal_bg, (615, 140)), pygame.mouse.get_pos())
+                WIN.blit(pygame.transform.scale(hover_bg, (620, 125)), pygame.mouse.get_pos())
                 words = cozyfont.render(render_text("How much energy do you have today?", mouse_xy, 20), True, (255,255,255))
                 WIN.blit(words, mouse_xy)
 
@@ -240,7 +253,7 @@ def display_mental_screen(today_jentry):
                 mouse_xy = pygame.mouse.get_pos()
                 mouse_xy = ((mouse_xy[0] + 40), (mouse_xy[1] + 10))
 
-                WIN.blit(pygame.transform.scale(journal_bg, (600, 140)), pygame.mouse.get_pos())
+                WIN.blit(pygame.transform.scale(hover_bg, (600, 125)), pygame.mouse.get_pos())
                 words = cozyfont.render(render_text("How much free time have you had today?", mouse_xy, 20), True, (255,255,255))
                 WIN.blit(words, mouse_xy)
 

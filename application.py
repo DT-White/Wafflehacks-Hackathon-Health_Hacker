@@ -14,11 +14,15 @@ file_reader = FileReader()
 file_writer = FileWriter(False)
 log_entries = file_reader.read_log()
 journal = Journal(log_entries)
-# if datetime.today().strftime("%x") in journal.get_jentries():
-#     today_jentry = journal.get_jentry(datetime.today().strftime("%x"))
-# else:
-today_jentry = Jentry(404,404,404,404,404,404,404,404,404,"")
-journal.add_to_jentries_map(today_jentry)
+
+for i in journal.get_jentries():
+    print(i)
+
+if datetime.today().strftime("%x") in journal.get_jentries():
+    today_jentry = journal.get_jentry(datetime.today().strftime("%x"))
+else:
+    today_jentry = Jentry(404,404,404,404,404,404,404,404,404,"")
+    journal.add_to_jentries_map(today_jentry)
 #track_menstruation = True
 trends = []
 main_menu_loop = True
