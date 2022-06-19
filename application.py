@@ -194,9 +194,8 @@ def six_quit_screen():
         reminder_or_quote = "Don't forget to log your journal entry for today!"
     else:
         reminder_or_quote = random.choice(file_reader.read_quotes())
-    # return display_quit_screen(trend_message, reminder_or_quote)
+    return display_quit_screen(trend_message, reminder_or_quote)
 
-    print( display_quit_screen(trend_message, reminder_or_quote))
     #BUTTONS --> {Bottom} of the screen::
         # a [Back] button (go to screen one --> main menu)
         # and a [Quit] button (which closes the application)
