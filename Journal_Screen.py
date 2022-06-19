@@ -119,8 +119,10 @@ def display_journal_screen(todays_jentry):
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_BACKSPACE:
                         journal_text = journal_text[:-1]
+                        todays_jentry.set_value("Journal", journal_text)
                 else:
                     journal_text += event.unicode
+                    todays_jentry.set_value("Journal", journal_text)
 
 
        
@@ -133,7 +135,7 @@ def display_journal_screen(todays_jentry):
         
         text_bg_xy = (110,225)
         draw_image(text_bg, text_bg_xy)
-        render_text(journal_text, (145, 240), 65)
+        render_text(journal_text, (145, 240), 55)
 
         draw_image(button_submit, button_submit_rect)
         
