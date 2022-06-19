@@ -51,6 +51,7 @@ time_buttons = []
 time_xy = []
 
 button_images_up = []
+button_images_down = []
 
 # {BUTTON UP GRAPHICS}
 button_images_up.append(image.load("resource\\button_0_unselected.png").convert_alpha())
@@ -58,10 +59,10 @@ button_images_up.append(image.load("resource\\button_1_unselected.png").convert_
 button_images_up.append(image.load("resource\\button_2_unselected.png").convert_alpha())
 button_images_up.append(image.load("resource\\button_3_unselected.png").convert_alpha())
 
-zero_button_down_image = image.load("resource\\button_0_selected.png").convert_alpha()
-one_button_down_image = image.load("resource\\button_1_selected.png").convert_alpha()
-two_button_down_image = image.load("resource\\button_2_selected.png").convert_alpha()
-three_button_down_image = image.load("resource\\button_3_selected.png").convert_alpha()
+button_images_down.append(image.load("resource\\button_0_selected.png").convert_alpha())
+button_images_down.append(image.load("resource\\button_1_selected.png").convert_alpha())
+button_images_down.append(image.load("resource\\button_2_selected.png").convert_alpha())
+button_images_down.append(image.load("resource\\button_3_selected.png").convert_alpha())
 
 # {SOCIAL BUTTONS [x] = 810, 990, 1170, 1350 --> [y] = 236 }
 social_xy.append((810,236))
@@ -91,7 +92,7 @@ time_buttons.append(button_images_up[1].get_rect(topleft = time_xy[1]))
 time_xy.append((1170,636))
 time_buttons.append(button_images_up[2].get_rect(topleft = time_xy[2]))
 time_xy.append((1350,636))
-time_buttons.append(button_images_up[3].get_rect(topleft = social_xy[3]))
+time_buttons.append(button_images_up[3].get_rect(topleft = time_xy[3]))
 
 # {BACK_BUTTON}
 # back_button_image = pygame.image.load("resource\\icon_back_arrow.png").convert_alpha()
@@ -105,40 +106,15 @@ def draw_image(image, xy):
 
 def draw_bg(color):
     WIN.fill(color) #fill the window with color, color is a tuple variable (R,G,B)
-
-def __button_pushed(button_value):
-    match button_value:
-        case "s0":
-            return ("Social", 0)
-        case "s1":
-            return ("Social", 1)
-        case "s2":
-            return ("Social", 2)
-        case "s3":
-            return ("Social", 3)
-
-        case "e0":
-            return ("Energy", 0)
-        case "e1":
-            return ("Energy", 1)
-        case "e2":
-            return ("Energy", 2)
-        case "e3":
-            return ("Energy", 3)
-        
-        case "t0":
-            return ("Time", 0)
-        case "t1":
-            return ("Time", 1)
-        case "t2":
-            return ("Time", 2)
-        case "t3":
-            return ("Time", 3)
         
 
 def display_health_screen(today_jentry):
     clock = pygame.time.Clock()
     run = True
+    social_selection = False
+    energy_selection = False
+    time_selection = False
+    social_value = 0
 
     while run: #main loop that runs every frame
         clock.tick(FPS) #controls the update speed of the program
@@ -153,15 +129,22 @@ def display_health_screen(today_jentry):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 for i in range(4):
                     if(social_buttons[i].collidepoint(event.pos)):
-                        today_jentry.set_value(__button_pushed("s" + str(i)))
+                        social_selection = True
+                        social_value = i
+                        print("Social: " + str(i))
+                        today_jentry.set_value("Social", i)
 
                 for i in range(4):
                     if(energy_buttons[i].collidepoint(event.pos)):
-                        today_jentry.set_value(__button_pushed("e" + str(i)))
+                        energy_selection = True
+                        energy_value = i
+                        today_jentry.set_value("Energy", i)
 
                 for i in range(4):
                     if(time_buttons[i].collidepoint(event.pos)):
-                        today_jentry.set_value(__button_pushed("t" + str(i)))
+                        time_selection = True
+                        time_value = i
+                        today_jentry.set_value("Time", i)
 
             # if event.type == pygame.MOUSEBUTTONDOWN: #If the user clicked 
             #     if(back_button_image.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
@@ -186,6 +169,18 @@ def display_health_screen(today_jentry):
         #draw time
         for i in range(4):
             draw_image(button_images_up[i], time_xy[i])
+
+        #draw social button pressed
+        if (social_selection):
+            draw_image(button_images_down[social_value], social_xy[social_value])
+
+        #draw energy button pressed
+        if (energy_selection):
+            draw_image(button_images_down[energy_value], energy_xy[energy_value])
+
+        #draw time button pressed
+        if (time_selection):
+            draw_image(button_images_down[time_value], time_xy[time_value])
 
         draw_image(social_image, social_logo_xy)
         draw_image(energy_image, energy_logo_xy)
