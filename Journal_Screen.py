@@ -38,7 +38,7 @@ button_back_xy = (8,714)
 button_back_rect = button_back.get_rect(topleft = button_back_xy)
 
 button_submit = pygame.image.load("resource\\button_submit.png").convert_alpha() #load an image, convert alpha preserves transparency
-button_submit_xy = (500,700)
+button_submit_xy = (500,730)
 button_submit_rect = button_submit.get_rect(topleft = button_submit_xy)
 
 
@@ -131,9 +131,9 @@ def display_journal_screen(todays_jentry):
         draw_image(journal_button_image, journal_button_xy)
         draw_image(button_back, button_back_xy)
         
-        text_bg_xy = (110,155)
+        text_bg_xy = (110,225)
         draw_image(text_bg, text_bg_xy)
-        render_text(journal_text, (123, 180), 58)
+        render_text(journal_text, (145, 240), 65)
 
         draw_image(button_submit, button_submit_rect)
         

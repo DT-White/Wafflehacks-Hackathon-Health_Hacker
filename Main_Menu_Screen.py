@@ -9,7 +9,8 @@ SCREEN_HEIGHT = 864
 SCREEN_WIDTH = 1536
 WIN = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
 pygame.display.set_caption("main menu screen")
-cozyfont = pygame.font.Font('resource\CooperFiveOpti-Black.otf',  36)
+cozyfont = pygame.font.Font('resource\CooperFiveOpti-Black.otf', 36)
+app_title = pygame.font.Font('resource\CooperFiveOpti-Black.otf', 110)
 
 WHITE = (255,255,255)
 FPS = 60
@@ -107,6 +108,9 @@ def display_main_menu_screen(random_quote, show_journal_button):
         text_bg_xy = (110,350)
         draw_image(text_bg, text_bg_xy)
         render_text(random_quote, (125, 360), 57)
+
+        title_text = app_title.render("HEALTH HACKER", True, (pygame.Color("#cbb397ff")))
+        WIN.blit(title_text, (165, 90))
         
         pygame.display.flip()#This updates the screen to show all changes     
         
