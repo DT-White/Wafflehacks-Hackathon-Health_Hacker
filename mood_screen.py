@@ -18,11 +18,6 @@ background_image = image.load("resource\\background.png") #load an image as a su
 mood_bar_image = pygame.image.load("resource\\bar_mood.png").convert_alpha()
 mood_bar_xy = (140,290)
 
-# {BACK_BUTTON}
-back_button_image = pygame.image.load("resource\\icon_back_arrow.png").convert_alpha()
-back_button_xy = (1392,0)
-back_button = back_button_image.get_rect(topleft = back_button_xy)
-
 button_list = []
 button_xy_list = []
 button_image_list = []
@@ -95,9 +90,6 @@ def main():
                         print(i + 1)
                         return(str(i + 1))
 
-                if(back_button.collidepoint(event.pos)):
-                    return "back"
-
        
         draw_bg(WHITE)
         draw_image(background_image, (0,0))
@@ -110,8 +102,6 @@ def main():
 
         for i in range(10):
             draw_image(button_image_list[i], button_xy_list[i])
-
-        draw_image(back_button_image, back_button_xy)
 
         for i in range(10):
             if(button_list[i].collidepoint(pygame.mouse.get_pos())):
