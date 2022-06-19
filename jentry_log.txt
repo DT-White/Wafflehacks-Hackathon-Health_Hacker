@@ -41,4 +41,7 @@ True|Tracking Menstruation
 05/23/22|12|1|1|2|0|3|2|False|Might test string 35
 06/18/22|8|3|2|0|2|0|2|False|Worked really hard on this project, and I'm very proud of it and everyone who worked on it! 
 06/18/22|7|0|0|0|0|0|0|False|zero zero zero 
+<<<<<<< HEAD
 >>>>>>> cccf1064df1a11e030ef276e97f93878066960f3
+=======
+>>>>>>> 39b8a5f69bbc1e13ebb15200044506bb932c54ab
