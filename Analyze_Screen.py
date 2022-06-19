@@ -84,16 +84,6 @@ icon_sleep_u = pygame.image.load("resource\\icon_sleep_unselected.png").convert_
 icon_sleep_xy = (1394,432)
 icon_sleep_rect = icon_sleep_u.get_rect(topleft = icon_sleep_xy)
 
-# icon_month_s = pygame.image.load("resource\\icon_month_selected.png").convert_alpha() #load an image, convert alpha preserves transparency
-# icon_month_u = pygame.image.load("resource\\icon_month_unselected.png").convert_alpha() #load an image, convert alpha preserves transparency
-# icon_month_xy = (1250,576)
-# icon_month_rect = icon_month_u.get_rect(topleft = icon_month_xy)
-
-# icon_week_s = pygame.image.load("resource\\icon_week_selected.png").convert_alpha() #load an image, convert alpha preserves transparency
-# icon_week_u = pygame.image.load("resource\\icon_week_unselected.png").convert_alpha() #load an image, convert alpha preserves transparency
-# icon_week_xy = (1394,576)
-# icon_week_rect = icon_week_u.get_rect(topleft = icon_week_xy)
-
 icon_move_backward = pygame.image.load("resource\\icon_move_backward.png").convert_alpha() #load an image, convert alpha preserves transparency
 icon_move_backward_xy = (1250,576)
 icon_move_backward_rect = icon_back_arrow.get_rect(topleft = icon_move_backward_xy)
@@ -121,11 +111,6 @@ def draw_line():
     pygame.draw.line(WIN, (0,0,0), (0,0), (600,100), 6)
 
 def display_navigation(stat_selected, timespan, period_selected):
-    # if(period_selected):
-    #         draw_image(icon_period_s, icon_period_xy)
-    # else:
-    #     draw_image(icon_period_u, icon_period_xy)
-
     draw_image(icon_back_arrow, icon_back_arrow_xy)
 
     if(stat_selected == "Social"):
@@ -153,14 +138,6 @@ def display_navigation(stat_selected, timespan, period_selected):
         draw_image(icon_sleep_s, icon_sleep_xy)
     else:
         draw_image(icon_sleep_u, icon_sleep_xy)
-    # if(timespan == "Month"):
-    #     draw_image(icon_month_s, icon_month_xy)
-    # else:
-    #     draw_image(icon_month_u, icon_month_xy)
-    # if(timespan == "Week"):
-    #     draw_image(icon_week_s, icon_week_xy)
-    # else:
-    #     draw_image(icon_week_u, icon_week_xy)
     draw_image(icon_move_backward, icon_move_backward_xy)
     draw_image(icon_move_forward, icon_move_forward_xy)
 
@@ -282,14 +259,3 @@ def display_analyze_screen(journal):
 
 if __name__ == "__main__":
     display_analyze_screen(test_journal)
-
-
-# (1032, 708)
-# (879, 708)
-# (725, 708)
-# (575, 711)
-# (426, 708)
-# (270, 708)
-# (124, 707)
-
-#(152, 207) bar dimensions
