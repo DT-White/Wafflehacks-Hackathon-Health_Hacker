@@ -37,9 +37,10 @@ def run():
                     entry_page_selection = four_journal_screen()
                 if entry_page_selection == "submit":
                     break
-        quit_screen_selection = six_quit_screen()
-        if quit_screen_selection != "back":
-            break
+        quit_screen_selection = ""
+        while quit_screen_selection != "back":
+            quit_screen_selection = six_quit_screen()
+            
 
 
     
@@ -193,9 +194,9 @@ def six_quit_screen():
         reminder_or_quote = "Don't forget to log your journal entry for today!"
     else:
         reminder_or_quote = random.choice(file_reader.read_quotes())
-    return display_quit_screen(trend_message, reminder_or_quote)
+    # return display_quit_screen(trend_message, reminder_or_quote)
 
-    return display_quit_screen(trend_message, reminder_or_quote)
+    print( display_quit_screen(trend_message, reminder_or_quote))
     #BUTTONS --> {Bottom} of the screen::
         # a [Back] button (go to screen one --> main menu)
         # and a [Quit] button (which closes the application)
