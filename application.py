@@ -41,11 +41,15 @@ def run():
                 if entry_page_selection == "journal":
                     entry_page_selection = four_journal_screen()
                 if entry_page_selection == "submit":
-                    if today_jentry.get_social + today_jentry.get_energy + today_jentry.get_freetime + today_jentry.get_exercise + today_jentry.get_diet + today_jentry.get_sleep < 100:
+                    if today_jentry.get_social() + today_jentry.get_energy() + today_jentry.get_freetime() + today_jentry.get_exercise() + today_jentry.get_diet() + today_jentry.get_sleep() < 100:
                         jentry_done = True
-        quit_screen_selection = ""
-    while quit_screen_selection != "back":
-        quit_screen_selection = six_quit_screen()
+                        
+                if entry_page_selection == "back":
+                    break
+        elif main_menu_selection == "quit":
+            quit_screen_selection = ""
+            while quit_screen_selection != "back":
+                quit_screen_selection = six_quit_screen()
             
 
 
@@ -73,47 +77,11 @@ def three_exercise_diet_sleep_screen():
     return display_body_screen(today_jentry)
 
 def four_journal_screen():
-    return display_journal_screen()
+    return display_journal_screen(today_jentry)
     
 
 def five_analysis_screen():
-    #pass journal object
-    display_analyze_screen(journal)
-    
-    #Display graph:
-        #X-axis is date
-            #should have configuration for 7-day, and 30-day scale
-            #7-day scale is the {DEFAULT}
-        #Y-axis is mood
-            #should range from 0 (at the origin) to 10 at the highest point
-    
-    #BUTTONS --> {RIGHT} of the screen:
-        #Buttons should be organized in two columns and six rows
-        
-        #ROW {ONE}
-            #displays a menstruation [blood.png] button that toggles period days (see below)
-            #displays a back [<] button (returns to screen one --> main menu)
-        
-        #ROWS {TWO} - {THREE} - {FOUR}
-            #order of elements to display, left to right, top to bottom:
-                #Social, Energy, Freetime, Exercise, Sleep, Diet
-            #All six variable [X.png] where X is an image representing the statistic to track
-                #these images should show up on screens two and three (physical and mental health screens)
-            
-        #ROW {FIVE}
-            #Month-Long [calendar.png] to display the graph on a 30-day scale
-            #Week-Long [calendar_week_highlighted.png] to display the graph on a 7-day scale
-            
-        #ROW {SIX}
-            # Next [>] and Previous [<] buttons that cycle through the currently selected time-scale on the graph
-                # if "Week" scale is selected, cycle through 7 days at a time
-                # if "Month" scale is selected, cycle through 30 days at a time
-
-    #Above the graph:
-        #display a red line starting with the day the period started and period ended
-            #should account for a currently occuring period (ending at the present day)
-                #Do we want to have a symbol indicating an on-going period?
-    
+    display_analyze_screen(journal)    
 
 def six_quit_screen():
     trend_message = "You're doing well! Keep up the good work!"
@@ -133,10 +101,6 @@ def six_quit_screen():
     else:
         reminder_or_quote = random.choice(file_reader.read_quotes())
     return display_quit_screen(trend_message, reminder_or_quote)
-
-    #BUTTONS --> {Bottom} of the screen::
-        # a [Back] button (go to screen one --> main menu)
-        # and a [Quit] button (which closes the application)
     
 
 def get_downward_trend_message(value):
@@ -144,5 +108,3 @@ def get_downward_trend_message(value):
         trends.append("There's been a downward trend in your " + value + " recently.")
 
 run()
-# j = journal.get_jentries()
-# print(list(j.keys()))
