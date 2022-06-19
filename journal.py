@@ -43,9 +43,10 @@ class Journal:
     
     #Methods
     def __generate_score(self, value_to_check):
-        today = datetime.today().strftime("%x")
-        yesterday = (datetime.today() - timedelta(days= 1)).strftime("%x")
-        two_day_ago = (datetime.today() - timedelta(days= 2)).strftime("%x")
+        
+        today = (datetime.today() - timedelta(days= 1)).strftime("%x")
+        yesterday = (datetime.today() - timedelta(days= 2)).strftime("%x")
+        two_day_ago = (datetime.today() - timedelta(days= 3)).strftime("%x")
 
         day_one_score = int(self.jentries[today].get_value(value_to_check))
         day_two_score = int(self.jentries[yesterday].get_value(value_to_check))
