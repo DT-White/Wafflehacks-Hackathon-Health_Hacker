@@ -94,5 +94,8 @@ class Journal:
 
         return monthly_sum/30
 
+    def get_sum(self, jentry):
+        return jentry.get_social() + jentry.get_energy() + jentry.get_freetime() + jentry.get_exercise() + jentry.get_diet() + jentry.get_sleep()
+    
     def add_to_jentries_map(self, jentry):
        self.jentries.update({jentry.get_date() : jentry})
