@@ -46,10 +46,11 @@ def run():
                     entry_page_selection = three_exercise_diet_sleep_screen()
                 if entry_page_selection == "journal":
                     entry_page_selection = four_journal_screen()
-                    if today_jentry.get_social() + today_jentry.get_energy() + today_jentry.get_freetime() + today_jentry.get_exercise() + today_jentry.get_diet() + today_jentry.get_sleep() < 100:
-                        jentry_done = True
-                        file_writer.write_to_log(today_jentry.get_log())
-                        break
+                    if entry_page_selection == "submit":
+                        if today_jentry.get_social() + today_jentry.get_energy() + today_jentry.get_freetime() + today_jentry.get_exercise() + today_jentry.get_diet() + today_jentry.get_sleep() < 100:
+                            jentry_done = True
+                            file_writer.write_to_log(today_jentry.get_log())
+                            break 
                 if entry_page_selection == "back":
                     break
         elif main_menu_selection == "quit":
