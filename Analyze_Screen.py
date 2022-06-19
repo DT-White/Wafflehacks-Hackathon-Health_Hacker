@@ -202,7 +202,6 @@ def populate_week(journal):
     for i in range(7):
         week.append(journal.get_jentry(today.strftime("%x")))
         today = today - timedelta(days = 1)
-    for each in week:
     week.reverse()
     return week
 
