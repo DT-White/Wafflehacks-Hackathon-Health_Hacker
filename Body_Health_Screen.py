@@ -15,8 +15,8 @@ cozyfont = pygame.font.Font('resource\CooperFiveOpti-Black.otf', 42)
 WHITE = (255,255,255)
 FPS = 60
 
-background_image = pygame.image.load("resource\\background.png") #load an image as a surface
-text_bg = pygame.image.load("resource\\text_background.png").convert_alpha() #load an image, convert alpha preserves transparency
+background_image = pygame.image.load("resource\\background.png")
+hover_bg = pygame.image.load("resource\\hover_background.png").convert_alpha()
 
 # {MIND_BUTTON}
 mind_button_image = pygame.image.load("resource\\tab_mind_unselected.png").convert_alpha() #load an image, convert alpha preserves transparency
@@ -108,6 +108,25 @@ sleep_buttons.append(button_images_up[3].get_rect(topleft = sleep_xy[3]))
 def draw_image(image, xy):
     WIN.blit(image, xy) #Screen.blit(image, (x,y))
 
+def render_text(message, xy, line_length):
+    lines = [""]
+    index = 0
+    running_total = 0
+    for word in message.split():
+        if(running_total + len(word) < line_length):
+            lines[index] += word + " "
+            running_total += len(word)+1
+        else:
+            index += 1
+            lines.append("")
+            lines[index] += word + " "
+            running_total = len(word)+1
+    x = xy[0]
+    y = xy[1]
+    for each in lines:
+        words = cozyfont.render(each, True, (255,255,255))
+        WIN.blit(words, (x,y))
+        y += 40
 
 def draw_bg(color):
     WIN.fill(color) #fill the window with color, color is a tuple variable (R,G,B)
@@ -120,6 +139,18 @@ def display_body_screen(today_jentry):
     diet_selection = False
     sleep_selection = False
     exercise_value = 0
+
+    if(today_jentry.get_value("Exercise") != 404):
+        exercise_selection = True
+        exercise_value = today_jentry.get_value("Exercise")
+
+    if(today_jentry.get_value("Diet") != 404):
+        diet_selection = True
+        diet_value = today_jentry.get_value("Diet")
+
+    if(today_jentry.get_value("Sleep") != 404):
+        sleep_selection = True
+        sleep_value = today_jentry.get_value("Sleep")
 
     while run: #main loop that runs every frame
         clock.tick(FPS) #controls the update speed of the program
@@ -203,14 +234,28 @@ def display_body_screen(today_jentry):
 
         for i in range(10):
             if(exercise_logo_button.collidepoint(pygame.mouse.get_pos())):
-                words = cozyfont.render(render_text("How much exercise have you had today?", pygame.mouse.get_pos(), 25), True, (255,255,255))
-                WIN.blit(words, pygame.mouse.get_pos())
+                mouse_xy = pygame.mouse.get_pos()
+                mouse_xy = ((mouse_xy[0] + 40), (mouse_xy[1] + 10))
+
+                WIN.blit(pygame.transform.scale(hover_bg, (600, 125)), pygame.mouse.get_pos())
+                words = cozyfont.render(render_text("How much exercise have you had today?", mouse_xy, 20), True, (255,255,255))
+                WIN.blit(words, mouse_xy)
+
             if(diet_logo_button.collidepoint(pygame.mouse.get_pos())):
-                words = cozyfont.render(render_text("How healthy did you eat today?", pygame.mouse.get_pos(), 25), True, (255,255,255))
-                WIN.blit(words, pygame.mouse.get_pos())
+                mouse_xy = pygame.mouse.get_pos()
+                mouse_xy = ((mouse_xy[0] + 40), (mouse_xy[1] + 10))
+
+                WIN.blit(pygame.transform.scale(hover_bg, (620, 125)), pygame.mouse.get_pos())
+                words = cozyfont.render(render_text("How healthy did you eat today?", mouse_xy, 20), True, (255,255,255))
+                WIN.blit(words, mouse_xy)
+
             if(sleep_logo_button.collidepoint(pygame.mouse.get_pos())):
-                words = cozyfont.render(render_text("How much sleep have you gotten today?", pygame.mouse.get_pos(), 25), True, (255,255,255))
-                WIN.blit(words, pygame.mouse.get_pos())
+                mouse_xy = pygame.mouse.get_pos()
+                mouse_xy = ((mouse_xy[0] + 40), (mouse_xy[1] + 10))
+
+                WIN.blit(pygame.transform.scale(hover_bg, (620, 125)), pygame.mouse.get_pos())
+                words = cozyfont.render(render_text("How much sleep have you gotten today?", mouse_xy, 20), True, (255,255,255))
+                WIN.blit(words, mouse_xy)
 
         pygame.display.flip() # This updates the screen to show all changes     
         
