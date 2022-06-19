@@ -138,14 +138,12 @@ def display_health_screen(today_jentry):
                     if(energy_buttons[i].collidepoint(event.pos)):
                         energy_selection = True
                         energy_value = i
-                        print("Energy: " + str(i))
                         today_jentry.set_value("Energy", i)
 
                 for i in range(4):
                     if(time_buttons[i].collidepoint(event.pos)):
                         time_selection = True
                         time_value = i
-                        print("Time: " + str(i))
                         today_jentry.set_value("Time", i)
 
             # if event.type == pygame.MOUSEBUTTONDOWN: #If the user clicked 
