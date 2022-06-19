@@ -45,4 +45,3 @@ class FileReader:
             quote_line = file.readline()
         file.close()
         return quotes
-
