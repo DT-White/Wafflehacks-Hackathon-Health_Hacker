@@ -34,7 +34,7 @@ journal_button_xy = (1040,30)
 journal_button = journal_button_image.get_rect(topleft = journal_button_xy)
 
 button_back = pygame.image.load("resource\\icon_back_arrow.png").convert_alpha() #load an image, convert alpha preserves transparency
-button_back_xy = (1392,0)
+button_back_xy = (8,714)
 button_back_rect = button_back.get_rect(topleft = button_back_xy)
 
 button_submit = pygame.image.load("resource\\button_submit.png").convert_alpha() #load an image, convert alpha preserves transparency
@@ -101,18 +101,21 @@ def display_journal_screen(todays_jentry):
         for event in pygame.event.get(): #Checks all pygame events every frame
             if event.type == pygame.QUIT: #If the user quits the program
                 run = False #Stop running
+
             if event.type == pygame.MOUSEBUTTONDOWN: #If the user clicked
                 if(mind_button.collidepoint(event.pos)):
-                    return "mind"
+                    return ("mind")
 
                 if(body_button.collidepoint(event.pos)):
-                    return "body"
+                    return ("body")
 
                 if(button_back_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
                     return ("back")
+
                 if(button_submit_rect.collidepoint(event.pos)):
                     todays_jentry.set_value("Journal", journal_text)
-                    return("submit")
+                    return ("submit")
+
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_BACKSPACE:
                         journal_text = journal_text[:-1]
@@ -123,7 +126,11 @@ def display_journal_screen(todays_jentry):
        
         draw_bg(WHITE) 
         draw_image(background_image, (0,0))
+        draw_image(mind_button_image, mind_button_xy)
+        draw_image(body_button_image, body_button_xy)
+        draw_image(journal_button_image, journal_button_xy)
         draw_image(button_back, button_back_xy)
+        
         text_bg_xy = (110,155)
         draw_image(text_bg, text_bg_xy)
         render_text(journal_text, (123, 180), 58)
