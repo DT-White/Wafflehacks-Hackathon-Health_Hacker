@@ -201,7 +201,10 @@ def populate_week(journal):
     today = datetime.now()
     for i in range(7):
         print(journal.get_jentry(today.strftime("%x")))
-        week.append(journal.get_jentry(today.strftime("%x")))
+        if(journal.has_jentry(today.strftime("%x"))):
+            week.append(journal.get_jentry(today.strftime("%x")))
+        else:
+            week.append(Jentry(today.strftime("%x"),0,0,0,0,0,0,0,False,"No entry for today"))
         today = today - timedelta(days = 1)
     week.reverse()
     return week

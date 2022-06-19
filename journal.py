@@ -38,6 +38,12 @@ class Journal:
             return self.jentries[key]
         else:
             return 0
+
+    def has_jentry(self, key):
+        if key in self.jentries.keys():
+            return True
+        else:
+            return False
     
     #Setters
     
