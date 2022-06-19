@@ -35,7 +35,3 @@ False|Tracking Menstruation
 06/15/22|8|2|2|2|0|3|2|False|Might test string 1
 06/16/22|9|2|2|2|0|3|2|False|Might test string 1
 06/17/22|10|2|2|2|0|3|2|False|Might test string 1
-<<<<<<< HEAD
-=======
-06/18/22|5|1|0|0|0|0|1|False|dfghjkl;
->>>>>>> e0a5a0be77cc9a4637c1c2f26cb8be4865e0cc13
