@@ -13,7 +13,7 @@ SCREEN_HEIGHT = 864
 SCREEN_WIDTH = 1536
 WIN = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
 pygame.display.set_caption("main menu screen")
-cozyfont = pygame.font.Font('resource\CooperFiveOpti-Black.otf',  36)
+cozyfont = pygame.font.Font('resource\CooperFiveOpti-Black.otf',  30)
 
 WHITE = (255,255,255)
 FPS = 60
@@ -44,6 +44,9 @@ graph_data_point = pygame.image.load("resource\\graph_data_point.png").convert_a
 graph_blue_bar = pygame.image.load("resource\\graph_bar_blue.png").convert_alpha()
 graph_green_bar = pygame.image.load("resource\\graph_bar_green.png").convert_alpha()
 graph_red_bar = pygame.image.load("resource\\graph_bar_red.png").convert_alpha()
+
+text_one = pygame.image.load("resource\\text_one.png").convert_alpha()
+text_ten = pygame.image.load("resource\\text_ten.png").convert_alpha()
 
 icon_period_s = pygame.image.load("resource\\icon_period_selected.png").convert_alpha() #load an image, convert alpha preserves transparency
 icon_period_u = pygame.image.load("resource\\icon_period_unselected.png").convert_alpha() #load an image, convert alpha preserves transparency
@@ -147,20 +150,28 @@ def graph_line(current_week):
     y = []
     i=0
     for day in current_week:
-        x.append((179)+(151*i))
+        x.append((179)+(152*i))
         y.append((684)-(day.get_value("Mood")*62))
         i+=1
     plot_line(x,y)
     plot_points(x,y)
+    plot_dates(current_week)
 
 def plot_line(x,y):
     for i in range(len(x)):
         if(i+1 < len(x)):
-            pygame.draw.line(WIN, pygame.Color("#ffcc00ff"), (x[i],y[i]), ((x[i+1],y[i+1])), 6)
+            pygame.draw.line(WIN, pygame.Color("#ffcc00ff"), (x[i]+16,y[i]+20), ((x[i+1]+16,y[i+1]+20)), 6)
 
 def plot_points(x,y):
     for i in range(len(x)):
-        draw_image(graph_data_point, (x[i]-18,y[i]-20))
+        draw_image(graph_data_point, (x[i],y[i]))
+def plot_dates(current_week):
+    x = 120
+    y = 750
+    for day in current_week:
+        label = cozyfont.render(day.get_value("Date")[:5], True, pygame.Color("#80916dff"))
+        WIN.blit(label, (x,y))
+        x += 155
     
     
 
@@ -221,17 +232,35 @@ def display_analyze_screen(journal):
                 if(icon_back_arrow_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
                     return "back"
                 if(icon_social_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    stat_selected = "Social"
+                    if(stat_selected == "Social"):
+                        stat_selected = ""
+                    else:
+                        stat_selected = "Social"
                 if(icon_exercise_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    stat_selected = "Exercise"
+                    if(stat_selected == "Exercise"):
+                        stat_selected = ""
+                    else:
+                        stat_selected = "Exercise"
                 if(icon_time_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    stat_selected = "Freetime"
+                    if(stat_selected == "Freetime"):
+                        stat_selected = ""
+                    else:
+                        stat_selected = "Freetime"
                 if(icon_diet_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    stat_selected = "Diet"
+                    if(stat_selected == "Diet"):
+                        stat_selected = ""
+                    else:
+                        stat_selected = "Diet"
                 if(icon_energy_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    stat_selected = "Energy"
+                    if(stat_selected == "Energy"):
+                        stat_selected = ""
+                    else:
+                        stat_selected = "Energy"
                 if(icon_sleep_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    stat_selected = "Sleep"
+                    if(stat_selected == "Sleep"):
+                        stat_selected = ""
+                    else:
+                        stat_selected = "Sleep"
                 # if(icon_month_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
                 #     timespan = "Month"
                 # if(icon_week_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
@@ -246,6 +275,8 @@ def display_analyze_screen(journal):
             graph_stat(stat_selected, current_week)
         draw_image(img_axis, axis_xy)
         graph_line(current_week)
+        draw_image(text_one, (40, 670))
+        draw_image(text_ten, (10, 79))
 
         
 

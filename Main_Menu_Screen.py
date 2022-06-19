@@ -100,7 +100,9 @@ def display_main_menu_screen(random_quote, show_journal_button):
         draw_bg(WHITE) 
         draw_image(background_image, (0,0))
         draw_image(button_analyze, button_analyze_xy)
+        
         draw_image(button_journal, button_journal_xy)
+        
         draw_image(button_quit, button_quit_xy)
         text_bg_xy = (110,350)
         draw_image(text_bg, text_bg_xy)
