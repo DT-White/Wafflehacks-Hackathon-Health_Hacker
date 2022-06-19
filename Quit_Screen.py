@@ -106,10 +106,10 @@ def display_quit_screen(trend_message, reminder_or_quote):
         draw_image(button_quit, button_quit_xy)
         text_bg_xy = (110,190)
         draw_image(text_bg, text_bg_xy)
-        render_text(trend_message, (123, 226), 55)
+        render_text(trend_message, (123, 226), 57)
         text_bg_xy = (110,430)
         draw_image(text_bg, text_bg_xy)
-        render_text(reminder_or_quote, (123, 470), 55)
+        render_text(reminder_or_quote, (123, 470), 57)
         
         pygame.display.flip()#This updates the screen to show all changes     
         

@@ -160,11 +160,15 @@ def graph_line(current_week):
 def plot_line(x,y):
     for i in range(len(x)):
         if(i+1 < len(x)):
-            pygame.draw.line(WIN, pygame.Color("#ffcc00ff"), (x[i]+16,y[i]+20), ((x[i+1]+16,y[i+1]+20)), 6)
+            if(y[i+1] != 684):
+                pygame.draw.line(WIN, pygame.Color("#ffcc00ff"), (x[i]+16,y[i]+20), ((x[i+1]+16,y[i+1]+20)), 6)
 
 def plot_points(x,y):
     for i in range(len(x)):
-        draw_image(graph_data_point, (x[i],y[i]))
+        if(y[i] != 684):
+            draw_image(graph_data_point, (x[i],y[i]))
+
+
 def plot_dates(current_week):
     x = 120
     y = 750
