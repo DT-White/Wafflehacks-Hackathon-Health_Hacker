@@ -17,7 +17,6 @@ journal = Journal(log_entries)
 
 for i in journal.get_jentries():
     print(i)
-print(journal.get_jentries()[datetime.today().strftime("%x")])
 
 if datetime.today().strftime("%x") in journal.get_jentries():
     today_jentry = journal.get_jentry(datetime.today().strftime("%x"))
