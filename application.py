@@ -14,10 +14,6 @@ file_reader = FileReader()
 file_writer = FileWriter(False)
 log_entries = file_reader.read_log()
 journal = Journal(log_entries)
-
-for i in journal.get_jentries():
-    print(i)
-
 if datetime.today().strftime("%x") in journal.get_jentries():
     today_jentry = journal.get_jentry(datetime.today().strftime("%x"))
 else:
@@ -54,7 +50,6 @@ def run():
                         jentry_done = True
                         file_writer.write_to_log(today_jentry.get_log())
                         break
-                    entry_page_selection = "journal"
                 if entry_page_selection == "back":
                     break
         elif main_menu_selection == "quit":
