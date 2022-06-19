@@ -164,10 +164,10 @@ def display_mental_screen(today_jentry):
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if(body_button.collidepoint(event.pos)):
-                    return "body"
+                    return ("body")
 
                 if(journal_button.collidepoint(event.pos)):
-                    return "journal"
+                    return ("journal")
                 
                 for i in range(4):
                     if(social_buttons[i].collidepoint(event.pos)):
