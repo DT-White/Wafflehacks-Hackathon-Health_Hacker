@@ -2,6 +2,7 @@ import os
 import pygame
 
 from pathlib import Path
+from jentry import Jentry
 
 pygame.init()
 
@@ -24,8 +25,8 @@ button_back_xy = (1392,0)
 button_back_rect = button_back.get_rect(topleft = button_back_xy)
 
 button_submit = pygame.image.load("resource\\button_submit.png").convert_alpha() #load an image, convert alpha preserves transparency
-button_submit_xy = (1392,0)
-submit_button_rect = button_submit.get_rect(topleft = button_submit_xy)
+button_submit_xy = (500,700)
+button_submit_rect = button_submit.get_rect(topleft = button_submit_xy)
 
 
 
@@ -69,10 +70,10 @@ def render_text(message, xy, line_length):
         y += 40
 
 
-def display_journal_screen():
+def display_journal_screen(todays_jentry):
     clock = pygame.time.Clock()
     run = True
-    journal_text = ""
+    journal_text = todays_jentry.get_value("Journal")
     # if(show_journal_button):
     #     button_journal = pygame.image.load("resource\\button_journal.png").convert_alpha() #load an image, convert alpha preserves transparency   
     # else:
@@ -89,6 +90,9 @@ def display_journal_screen():
             if event.type == pygame.MOUSEBUTTONDOWN: #If the user clicked 
                 if(button_back_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
                     return ("back")
+                if(button_submit_rect.collidepoint(event.pos)):
+                    todays_jentry.set_value("Journal", journal_text)
+                    return("submit")
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_BACKSPACE:
                         journal_text = journal_text[:-1]
@@ -103,10 +107,12 @@ def display_journal_screen():
         text_bg_xy = (110,155)
         draw_image(text_bg, text_bg_xy)
         render_text(journal_text, (123, 180), 58)
+
+        draw_image(button_submit, button_submit_rect)
         
         pygame.display.flip()#This updates the screen to show all changes     
         
     pygame.quit()
 
 if __name__ == "__main__":
-    display_journal_screen()
+    display_journal_screen(Jentry("06/18/22",2, 1, 3, 1,3,2,3,False,"This Jentry is for testing"))
