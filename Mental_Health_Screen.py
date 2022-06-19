@@ -1,5 +1,5 @@
 import pygame
-from pygame import display, draw, image
+from pygame import display, image
 from jentry import Jentry
 
 pygame.init()
@@ -8,7 +8,8 @@ SCREEN_HEIGHT = 864
 SCREEN_WIDTH = 1536
 WIN = display.set_mode((0,0), pygame.FULLSCREEN)
 display.set_caption("mental health screen")
-cozyfont = pygame.font.Font('resource\CooperFiveOpti-Black.otf',  36)
+labelfont = pygame.font.Font('resource\CooperFiveOpti-Black.otf', 95)
+cozyfont = pygame.font.Font('resource\CooperFiveOpti-Black.otf', 42)
 
 WHITE = (255,255,255)
 FPS = 60
@@ -34,10 +35,13 @@ journal_button = journal_button_image.get_rect(topleft = journal_button_xy)
 # {ROW IDENTIFIERS}
 social_image = pygame.image.load("resource\\icon_social_unselected.png").convert_alpha()
 social_logo_xy = (40,240)
+social_logo_button = social_image.get_rect(topleft = social_logo_xy)
 energy_image = pygame.image.load("resource\\icon_energy_unselected.png").convert_alpha()
 energy_logo_xy = (40,440)
+energy_logo_button = energy_image.get_rect(topleft = energy_logo_xy)
 time_image = pygame.image.load("resource\\icon_time_unselected.png").convert_alpha()
 time_logo_xy = (40,640)
+time_logo_button = time_image.get_rect(topleft = time_logo_xy)
 
 ########################################################
 #               Number buttons here                    #
@@ -108,7 +112,7 @@ def draw_bg(color):
     WIN.fill(color) #fill the window with color, color is a tuple variable (R,G,B)
         
 
-def display_health_screen(today_jentry):
+def display_mental_screen(today_jentry):
     clock = pygame.time.Clock()
     run = True
     social_selection = False
@@ -127,32 +131,30 @@ def display_health_screen(today_jentry):
                 exit() #terminate
 
             if event.type == pygame.MOUSEBUTTONDOWN:
+                if(body_button.collidepoint(event.pos)):
+                    return "body"
+
+                if(journal_button.collidepoint(event.pos)):
+                    return "journal"
+                
                 for i in range(4):
                     if(social_buttons[i].collidepoint(event.pos)):
                         social_selection = True
                         social_value = i
-                        print("Social: " + str(i))
                         today_jentry.set_value("Social", i)
 
                 for i in range(4):
                     if(energy_buttons[i].collidepoint(event.pos)):
                         energy_selection = True
                         energy_value = i
-                        print("Energy: " + str(i))
                         today_jentry.set_value("Energy", i)
 
                 for i in range(4):
                     if(time_buttons[i].collidepoint(event.pos)):
                         time_selection = True
                         time_value = i
-                        print("Time: " + str(i))
                         today_jentry.set_value("Time", i)
 
-            # if event.type == pygame.MOUSEBUTTONDOWN: #If the user clicked 
-            #     if(back_button_image.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-            #         return
-
-            # --->    [[[today_jentry_to_update.set_value("Energy", 2)]]]
 
 
         draw_image(background_image, (0,0))
@@ -189,9 +191,29 @@ def display_health_screen(today_jentry):
         draw_image(time_image, time_logo_xy)
         #draw_image(back_button_image, back_button_xy)
         
+        social_label_text = labelfont.render("Social:", True, (pygame.Color("#cbb397ff")))
+        WIN.blit(social_label_text, (224, 241))
+        
+        energy_label_text = labelfont.render("Energy:", True, (pygame.Color("#cbb397ff")))
+        WIN.blit(energy_label_text, (224, 441))
+        
+        freetime_label_text = labelfont.render("Freetime:", True, (pygame.Color("#cbb397ff")))
+        WIN.blit(freetime_label_text, (224, 641))
+
+        for i in range(10):
+            if(social_logo_button.collidepoint(pygame.mouse.get_pos())):
+                words = cozyfont.render("How much social interaction have you had today?", True, (255,255,255))
+                WIN.blit(words, pygame.mouse.get_pos())
+            if(energy_logo_button.collidepoint(pygame.mouse.get_pos())):
+                words = cozyfont.render("How much energy do you have today?", True, (255,255,255))
+                WIN.blit(words, pygame.mouse.get_pos())
+            if(time_logo_button.collidepoint(pygame.mouse.get_pos())):
+                words = cozyfont.render("How much free time have you had today?", True, (255,255,255))
+                WIN.blit(words, pygame.mouse.get_pos())
+
         pygame.display.flip() # This updates the screen to show all changes     
         
     pygame.quit()
 
 if __name__ == "__main__":
-    display_health_screen()
+    display_mental_screen()

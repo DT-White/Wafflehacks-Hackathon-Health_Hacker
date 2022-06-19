@@ -4,8 +4,9 @@ import random
 from Main_Menu_Screen import display_main_menu_screen
 import mood_screen
 from Analyze_Screen import display_analyze_screen
-from Mental_Health_Screen import display_health_screen
+from Mental_Health_Screen import display_mental_screen
 from Quit_Screen import display_quit_screen
+from Body_Health_Screen import display_body_screen
 
 file_reader = FileReader()
 log_entries = file_reader.read_log()
@@ -36,7 +37,8 @@ def run():
                 if entry_page_selection == "journal":
                     entry_page_selection = four_journal_screen()
                 if entry_page_selection == "submit":
-                    break
+                    if today_jentry.get_social + today_jentry.get_energy + today_jentry.get_freetime + today_jentry.get_exercise + today_jentry.get_diet + today_jentry.get_sleep < 100 and today_jentry.get_journal != "404":
+                        jentry_done = True
         quit_screen_selection = ""
         while quit_screen_selection != "back":
             quit_screen_selection = six_quit_screen()
@@ -56,87 +58,19 @@ def zero_main_menu():
     if not datetime.today in journal.get_jentries():
         show_journal_button = True
     return display_main_menu_screen(quote, show_journal_button)
-    #BUTTONS --> {BOTTOM} of the screen:
-        #go to [Trends] screen (screen five)
-        #go to [Journal] screen (screen one)
-        #go to [Quit] screen (screen six)
 
 def one_mood_screen():
-    today_jentry.set_value("Mood", mood_screen.main()) 
-    
-    # Back [<-.png] button (to main_menu)
-    # prints "How is your mood today on a scale of one to ten?" on screen (make it cozy <3)
-    # loop 10 times to display following:
-        #display mood button #[i] <-- iterates 1 through 10
-        #buttons should vary in color from {RED} to {GREEN} (fade from red to green)
-
-    #display [check.png] button (Screen two; record selected button above into Mood)
-        #Button should be {between 5 and 6}
-    #needs to also display "1", and "10" underneath the line of buttons
-        #don't want to display all 10 numbers
-    
+    today_jentry.set_value("Mood", mood_screen.main())    
 
 def two_social_energy_freetime_screen():
-    #pass today jentry
-    return display_health_screen(today_jentry)
-    #do the following each for "Social", "Energy", "Freetime":
-        #loop 4 times to display following:
-            #A box with [i] <-- iterates {0 through 3}
-            #box color should vary from {RED} to {GREEN}
-            #buttons should print left to right
-        #this row of buttons should be labeled "Social", "Energy", "Freetime" in order, labeled from top to bottom
-        #To the left of each name, an image representing each will be displayed
-            #Social --> message chat logo
-            #Energy --> lightning bolt
-            #Freetime --> clock
-    
-    #BUTTONS --> {TOP} of the screen:
-        # [Mental Health] tab (current screen --> disable button)
-        # [Physical Health] tab (screen three)
-        # [Journal] tab (screen four)
-        # back [<-] button (screen zero)
+    return display_mental_screen(today_jentry)
 
 def three_exercise_diet_sleep_screen():
-    #pass today jentry
-    #return display_body_screen()
-
-    #do the following each for "Exercise", "Diet", "Sleep":
-        #Loop 4 times to display following:
-            #A box with [i] <-- iterates 0 through 3
-            #box color should vary from RED to GREEN
-            #buttons should print left to right
-        #this row of buttons should be labeled "Exercise", "Diet", "Sleep" in order, labeled from top to bottom
-        #To the left of each name, an image representing each will be displayed
-            #Exercise --> dumbbell
-            #Sleep --> Moon and stars
-            #Diet --> An apple or drumstick or something
-    
-    #BUTTONS --> {TOP} of the screen:
-        # [Mental Health] tab (screen two)
-        # [Physical Health] tab (current screen --> disable button)
-        # [Journal] tab (screen four)
-        # back [<-] button (screen zero)
-    pass
+    return display_body_screen(today_jentry)
 
 def four_journal_screen():
-    #pass today gentry
-    #return display_journal_screen()
-
-    #display empty text box to accept user input
-    #display menstruation [blood.png] button
-        #if user menstruates, display button
-            #else 
-        #button should be a boolean to indicate that user is either currently on or off period (bleeding or not)
-    #display [Submit] journal button (parses/logs data, goes to screen **ZERO** the main menu screen)
-
-        #jentry called -> data parsed here
-
-    #BUTTONS --> top of the screen:
-        # [Mental Health] tab (screen two)
-        # [Physical Health] tab (screen three)
-        # [Journal] tab (current screen --> disable button)
-        # back [<-] button (screen zero)
-    pass
+    return display_journal_screen()
+    
 
 def five_analysis_screen():
     #pass journal object
