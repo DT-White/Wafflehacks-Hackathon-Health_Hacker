@@ -45,3 +45,6 @@ class FileReader:
             quote_line = file.readline()
         file.close()
         return quotes
+
+# f = FileReader()
+# f.read_log()
