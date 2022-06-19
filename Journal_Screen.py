@@ -8,7 +8,7 @@ pygame.init()
 SCREEN_HEIGHT = 864
 SCREEN_WIDTH = 1536
 WIN = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
-pygame.display.set_caption("main menu screen")
+pygame.display.set_caption("journal screen")
 cozyfont = pygame.font.Font('resource\CooperFiveOpti-Black.otf',  36)
 
 WHITE = (255,255,255)
@@ -16,16 +16,17 @@ FPS = 60
 
 background_image = pygame.image.load("resource\\background.png") #load an image as a surface
 
-text_bg = pygame.image.load("resource\\text_background.png").convert_alpha() #load an image, convert alpha preserves transparency
+text_bg = pygame.image.load("resource\\journal_background.png").convert_alpha() #load an image, convert alpha preserves transparency
 
 
 button_back = pygame.image.load("resource\\icon_back_arrow.png").convert_alpha() #load an image, convert alpha preserves transparency
-button_back_xy = (1536-144,0)
+button_back_xy = (1392,0)
 button_back_rect = button_back.get_rect(topleft = button_back_xy)
 
-button_quit = pygame.image.load("resource\\button_back.png").convert_alpha() #load an image, convert alpha preserves transparency
-button_quit_xy = (611,680)
-button_quit_rect = button_quit.get_rect(topleft = button_quit_xy)
+button_submit = pygame.image.load("resource\\button_submit.png").convert_alpha() #load an image, convert alpha preserves transparency
+button_submit_xy = (1392,0)
+submit_button_rect = button_submit.get_rect(topleft = button_submit_xy)
+
 
 
 
@@ -68,9 +69,10 @@ def render_text(message, xy, line_length):
         y += 40
 
 
-def display_quit_screen(trend_message, reminder_or_quote):
+def display_journal_screen():
     clock = pygame.time.Clock()
     run = True
+    journal_text = ""
     # if(show_journal_button):
     #     button_journal = pygame.image.load("resource\\button_journal.png").convert_alpha() #load an image, convert alpha preserves transparency   
     # else:
@@ -84,36 +86,27 @@ def display_quit_screen(trend_message, reminder_or_quote):
         for event in pygame.event.get(): #Checks all pygame events every frame
             if event.type == pygame.QUIT: #If the user quits the program
                 run = False #Stop running
-            if event.type == pygame.QUIT or ( event.type == pygame.KEYDOWN and event.key == pygame.K_1): #If the player clicks X button, or presses keyboard 1 (the 1 key)
-                pygame.quit() #quit
-                exit() #terminate
             if event.type == pygame.MOUSEBUTTONDOWN: #If the user clicked 
                 if(button_back_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
                     return ("back")
-            # if event.type == pygame.MOUSEBUTTONDOWN and show_journal_button: #If the user clicked 
-            #     if(button_journal_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-            #         return ("journal")
-            if event.type == pygame.MOUSEBUTTONDOWN: #If the user clicked 
-                if(button_quit_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    pygame.quit() #quit
-                    exit() #terminate
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_BACKSPACE:
+                        journal_text = journal_text[:-1]
+                else:
+                    journal_text += event.unicode
+
 
        
         draw_bg(WHITE) 
         draw_image(background_image, (0,0))
         draw_image(button_back, button_back_xy)
-        # draw_image(button_journal, button_journal_xy)
-        draw_image(button_quit, button_quit_xy)
-        text_bg_xy = (110,190)
+        text_bg_xy = (110,155)
         draw_image(text_bg, text_bg_xy)
-        render_text(trend_message, (123, 226), 57)
-        text_bg_xy = (110,430)
-        draw_image(text_bg, text_bg_xy)
-        render_text(reminder_or_quote, (123, 470), 57)
+        render_text(journal_text, (123, 180), 58)
         
         pygame.display.flip()#This updates the screen to show all changes     
         
     pygame.quit()
 
 if __name__ == "__main__":
-    display_quit_screen("Keep it up", "Do your log")
+    display_journal_screen()
