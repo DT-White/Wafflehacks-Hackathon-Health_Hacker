@@ -20,19 +20,19 @@ FPS = 60
 
 #testJentry = Jentry(mood, social, energy, freetime, exercise, diet, sleep, menstruation, journal)
 
-testJentry = Jentry("06/18/22",2, 1, 3, 1,3,2,3,False,"This Jentry is for testing")
-test_journal_jentries = ["06/18/22|10|1|1|2|0|3|2|False|more strings to test".split("|"),
-"06/17/22|8|1|1|2|0|3|2|False|test string for app".split("|"),
-"06/16/22|6|2|2|2|0|3|2|False|Might test string 1".split("|"),
-"06/15/22|4|1|3|1|0|3|3|True|Might test string 3".split("|"),
-"06/14/22|2|3|3|2|1|3|2|True|Might test string 4".split("|"),
-"06/13/22|0|3|2|3|2|3|1|True|Might test string 5".split("|"),
-"06/12/22|3|2|1|2|3|2|2|True|Might test string 6".split("|"),
-"06/11/22|2|1|3|2|3|2|1|True|Might test string 7".split("|"),
-"06/10/22|1|0|2|1|2|3|1|False|Might test string 8".split("|"),
-"06/09/22|1|1|1|2|0|3|2|False|Might delete this ap".split("|")]
+# testJentry = Jentry("06/18/22",2, 1, 3, 1,3,2,3,False,"This Jentry is for testing")
+# test_journal_jentries = ["06/18/22|10|1|1|2|0|3|2|False|more strings to test".split("|"),
+# "06/17/22|8|1|1|2|0|3|2|False|test string for app".split("|"),
+# "06/16/22|6|2|2|2|0|3|2|False|Might test string 1".split("|"),
+# "06/15/22|4|1|3|1|0|3|3|True|Might test string 3".split("|"),
+# "06/14/22|2|3|3|2|1|3|2|True|Might test string 4".split("|"),
+# "06/13/22|0|3|2|3|2|3|1|True|Might test string 5".split("|"),
+# "06/12/22|3|2|1|2|3|2|2|True|Might test string 6".split("|"),
+# "06/11/22|2|1|3|2|3|2|1|True|Might test string 7".split("|"),
+# "06/10/22|1|0|2|1|2|3|1|False|Might test string 8".split("|"),
+# "06/09/22|1|1|1|2|0|3|2|False|Might delete this ap".split("|")]
 
-test_journal = Journal(test_journal_jentries)
+# test_journal = Journal(test_journal_jentries)
 
 
 background_image = pygame.image.load("resource\\background.png") #load an image as a surface
