@@ -153,15 +153,15 @@ def display_health_screen(today_jentry):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 for i in range(4):
                     if(social_buttons[i].collidepoint(event.pos)):
-                        return today_jentry.set_value(__button_pushed("s" + str(i)))
+                        today_jentry.set_value(__button_pushed("s" + str(i)))
 
                 for i in range(4):
                     if(energy_buttons[i].collidepoint(event.pos)):
-                        return today_jentry.set_value(__button_pushed("e" + str(i)))
+                        today_jentry.set_value(__button_pushed("e" + str(i)))
 
                 for i in range(4):
                     if(time_buttons[i].collidepoint(event.pos)):
-                        return today_jentry.set_value(__button_pushed("t" + str(i)))
+                        today_jentry.set_value(__button_pushed("t" + str(i)))
 
             # if event.type == pygame.MOUSEBUTTONDOWN: #If the user clicked 
             #     if(back_button_image.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button

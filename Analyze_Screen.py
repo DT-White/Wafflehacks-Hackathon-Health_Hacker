@@ -165,14 +165,26 @@ def display_navigation(stat_selected, timespan, period_selected):
     draw_image(icon_move_forward, icon_move_forward_xy)
 
 def graph_line(current_week):
-    #37/40
-    i = 0
+    #37/40 
+    x = []
+    y = []
+    i=0
     for day in current_week:
-        x = (179)+(151*i)
-        y = (684)-(day.get_value("Mood")*62)
-        
-        draw_image(graph_data_point, (x,y))
+        x.append((179)+(151*i))
+        y.append((684)-(day.get_value("Mood")*62))
         i+=1
+    plot_line(x,y)
+    plot_points(x,y)
+
+def plot_line(x,y):
+    for i in range(len(x)):
+        if(i+1 < len(x)):
+            pygame.draw.line(WIN, pygame.Color("#ffcc00ff"), (x[i],y[i]), ((x[i+1],y[i+1])), 6)
+
+def plot_points(x,y):
+    for i in range(len(x)):
+        draw_image(graph_data_point, (x[i]-18,y[i]-20))
+    
     
 
 
