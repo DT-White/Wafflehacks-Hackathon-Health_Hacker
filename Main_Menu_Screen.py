@@ -116,8 +116,7 @@ def display_main_menu_screen(random_quote, show_journal_button):
                     return ("journal")
             if event.type == pygame.MOUSEBUTTONDOWN: #If the user clicked 
                 if(button_quit_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
-                    pygame.quit() #quit
-                    exit() #terminate
+                    return "quit"
 
        
         draw_bg(WHITE) 
