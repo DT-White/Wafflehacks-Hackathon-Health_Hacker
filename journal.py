@@ -73,7 +73,7 @@ class Journal:
         weekly_sum = 0
 
         for i in range(7):
-            current_day = datetime.now().strftime("%x") - timedelta(days=i)
+            current_day = (datetime.today() - timedelta(days=i)).strftime("%x") 
             weekly_sum += self.jentries[current_day].get_value(value_to_check)
 
         return weekly_sum/7

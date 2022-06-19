@@ -1,4 +1,5 @@
 from file_reader import FileReader
+from file_writer import FileWriter
 from journal import *
 import random
 from Main_Menu_Screen import display_main_menu_screen
@@ -10,10 +11,18 @@ from Body_Health_Screen import display_body_screen
 from Journal_Screen import display_journal_screen
 
 file_reader = FileReader()
+file_writer = FileWriter(False)
 log_entries = file_reader.read_log()
 journal = Journal(log_entries)
-today_jentry = Jentry(404,404,404,404,404,404,404,404,404,"")
-journal.add_to_jentries_map(today_jentry)
+
+for i in journal.get_jentries():
+    print(i)
+
+if datetime.today().strftime("%x") in journal.get_jentries():
+    today_jentry = journal.get_jentry(datetime.today().strftime("%x"))
+else:
+    today_jentry = Jentry(404,404,404,404,404,404,404,404,404,"")
+    journal.add_to_jentries_map(today_jentry)
 #track_menstruation = True
 trends = []
 main_menu_loop = True
@@ -31,19 +40,21 @@ def run():
             if analysis_page_selection == "back":
                 continue
         elif main_menu_selection == "journal":
-            one_mood_screen()
-            entry_page_selection = "mind"
-            while not jentry_done:
+            if not jentry_done:
+                entry_page_selection = "mind"
+                one_mood_screen()
+            while not jentry_done:   
                 if entry_page_selection == "mind":
                     entry_page_selection = two_social_energy_freetime_screen()
                 if entry_page_selection == "body":
                     entry_page_selection = three_exercise_diet_sleep_screen()
                 if entry_page_selection == "journal":
                     entry_page_selection = four_journal_screen()
-                if entry_page_selection == "submit":
                     if today_jentry.get_social() + today_jentry.get_energy() + today_jentry.get_freetime() + today_jentry.get_exercise() + today_jentry.get_diet() + today_jentry.get_sleep() < 100:
                         jentry_done = True
-                        
+                        file_writer.write_to_log(today_jentry.get_log())
+                        break
+                    entry_page_selection = "journal"
                 if entry_page_selection == "back":
                     break
         elif main_menu_selection == "quit":
@@ -63,7 +74,7 @@ def run():
 def zero_main_menu():
     quote = random.choice(file_reader.read_quotes())
     show_journal_button = False
-    if not datetime.today in journal.get_jentries():
+    if not today_jentry.get_social() + today_jentry.get_energy() + today_jentry.get_freetime() + today_jentry.get_exercise() + today_jentry.get_diet() + today_jentry.get_sleep() < 100:
         show_journal_button = True
     return display_main_menu_screen(quote, show_journal_button)
 
@@ -96,7 +107,7 @@ def six_quit_screen():
         get_downward_trend_message("Sleep")
     if len(trends) > 0:
         trend_message = random.choice(trends)
-    if not datetime.today in journal.get_jentries():
+    if not today_jentry.get_social() + today_jentry.get_energy() + today_jentry.get_freetime() + today_jentry.get_exercise() + today_jentry.get_diet() + today_jentry.get_sleep() < 100:
         reminder_or_quote = "Don't forget to log your journal entry for today!"
     else:
         reminder_or_quote = random.choice(file_reader.read_quotes())
