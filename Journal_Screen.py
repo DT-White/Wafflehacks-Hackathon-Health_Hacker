@@ -73,6 +73,7 @@ def render_text(message, xy, line_length):
 def display_journal_screen(todays_jentry):
     clock = pygame.time.Clock()
     run = True
+    
     journal_text = todays_jentry.get_value("Journal")
     # if(show_journal_button):
     #     button_journal = pygame.image.load("resource\\button_journal.png").convert_alpha() #load an image, convert alpha preserves transparency   
