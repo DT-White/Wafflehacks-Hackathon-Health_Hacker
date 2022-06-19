@@ -7,11 +7,12 @@ from Analyze_Screen import display_analyze_screen
 from Mental_Health_Screen import display_mental_screen
 from Quit_Screen import display_quit_screen
 from Body_Health_Screen import display_body_screen
+from Journal_Screen import display_journal_screen
 
 file_reader = FileReader()
 log_entries = file_reader.read_log()
 journal = Journal(log_entries)
-today_jentry = Jentry(404,404,404,404,404,404,404,404,404,404)
+today_jentry = Jentry(404,404,404,404,404,404,404,404,404,"")
 journal.add_to_jentries_map(today_jentry)
 #track_menstruation = True
 trends = []
@@ -40,11 +41,11 @@ def run():
                 if entry_page_selection == "journal":
                     entry_page_selection = four_journal_screen()
                 if entry_page_selection == "submit":
-                    if today_jentry.get_social + today_jentry.get_energy + today_jentry.get_freetime + today_jentry.get_exercise + today_jentry.get_diet + today_jentry.get_sleep < 100 and today_jentry.get_journal != "404":
+                    if today_jentry.get_social + today_jentry.get_energy + today_jentry.get_freetime + today_jentry.get_exercise + today_jentry.get_diet + today_jentry.get_sleep < 100:
                         jentry_done = True
         quit_screen_selection = ""
-        while quit_screen_selection != "back":
-            quit_screen_selection = six_quit_screen()
+    while quit_screen_selection != "back":
+        quit_screen_selection = six_quit_screen()
             
 
 

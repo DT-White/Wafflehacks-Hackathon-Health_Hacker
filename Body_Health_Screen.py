@@ -113,7 +113,7 @@ def draw_bg(color):
         
 
 def display_body_screen(today_jentry):
-    clock = pygame.sleep.Clock()
+    clock = pygame.time.Clock()
     run = True
     exercise_selection = False
     diet_selection = False
