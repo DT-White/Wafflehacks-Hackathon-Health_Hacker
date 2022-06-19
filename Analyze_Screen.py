@@ -169,7 +169,7 @@ def plot_dates(current_week):
     x = 120
     y = 750
     for day in current_week:
-        label = cozyfont.render(day.get_value("Date")[:5], True, pygame.Color("#80916dff"))
+        label = cozyfont.render(day.get_value("Date")[:5], True, pygame.Color("#4b4d26ff"))
         WIN.blit(label, (x,y))
         x += 155
     
@@ -200,6 +200,7 @@ def populate_week(journal):
     week = []
     today = datetime.now()
     for i in range(7):
+        print(journal.get_jentry(today.strftime("%x")))
         week.append(journal.get_jentry(today.strftime("%x")))
         today = today - timedelta(days = 1)
     week.reverse()
