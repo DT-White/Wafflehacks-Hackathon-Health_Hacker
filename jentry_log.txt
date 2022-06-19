@@ -35,8 +35,4 @@ False|Tracking Menstruation
 06/15/22|8|2|2|2|0|3|2|False|Might test string 1
 06/16/22|9|2|2|2|0|3|2|False|Might test string 1
 06/17/22|10|2|2|2|0|3|2|False|Might test string 1
-<<<<<<< HEAD
-06/18/22|5|1|0|0|0|0|1|False|dfghjkl;
-=======
-06/18/22|3|0|1|2|1|2|3|False|sdfsdfssrwef
->>>>>>> c36aeb62e66dc94bc6e6e675cb764008c055bc73
+06/19/22|3|2|1|0|1|1|1|False|Hackathon!!!
