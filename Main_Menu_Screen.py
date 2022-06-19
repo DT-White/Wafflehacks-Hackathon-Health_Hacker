@@ -47,47 +47,25 @@ def draw_line():
     #pygame.draw.rect(surface, color, pygame.Rect(30, 30, 60, 60))
     pygame.draw.line(WIN, (0,0,0), (0,0), (600,100), 6)
 
-def render_text(message, xy):
-    if(len(message) <= 60):
-        words = cozyfont.render(message, True, (255,255,255))
-        WIN.blit(words, xy)
-
-
-    elif(len(message) <= 60):
-        words = cozyfont.render(message[:60], True, (255,255,255))
-        WIN.blit(words, xy)
-
-        xy = (xy[0], xy[1] + 40)
-        words = cozyfont.render(message[60:], True, (255,255,255))
-        WIN.blit(words, xy)
-
-    elif(len(message) <= 120):
-        words = cozyfont.render(message[:60], True, (255,255,255))
-        WIN.blit(words, xy)
-
-        xy = (xy[0], xy[1] + 40)
-        words = cozyfont.render(message[60:120], True, (255,255,255))
-        WIN.blit(words, xy)
-
-        xy = (xy[0], xy[1] + 40)
-        words = cozyfont.render(message[120:], True, (255,255,255))
-        WIN.blit(words, xy)
-    else:
-        words = cozyfont.render(message[:60], True, (255,255,255))
-        WIN.blit(words, xy)
-
-        xy = (xy[0], xy[1] + 40)
-        words = cozyfont.render(message[60:120], True, (255,255,255))
-        WIN.blit(words, xy)
-
-        xy = (xy[0], xy[1] + 40)
-        words = cozyfont.render(message[120:180], True, (255,255,255))
-        WIN.blit(words, xy)
-
-        xy = (xy[0], xy[1] + 40)
-        words = cozyfont.render(message[180:], True, (255,255,255))
-        WIN.blit(words, xy)
-
+def render_text(message, xy, line_length):
+    lines = [""]
+    index = 0
+    running_total = 0
+    for word in message.split():
+        if(running_total + len(word) < line_length):
+            lines[index] += word + " "
+            running_total += len(word)+1
+        else:
+            index += 1
+            lines.append("")
+            lines[index] += word + " "
+            running_total = len(word)+1
+    x = xy[0]
+    y = xy[1]
+    for each in lines:
+        words = cozyfont.render(each, True, (255,255,255))
+        WIN.blit(words, (x,y))
+        y += 40
 
 def display_main_menu_screen(random_quote, show_journal_button):
     clock = pygame.time.Clock()
@@ -111,7 +89,7 @@ def display_main_menu_screen(random_quote, show_journal_button):
             if event.type == pygame.MOUSEBUTTONDOWN: #If the user clicked 
                 if(button_analyze_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
                     return ("analyze")
-            if event.type == pygame.MOUSEBUTTONDOWN and show_journal_button: #If the user clicked 
+            if event.type == pygame.MOUSEBUTTONDOWN and not show_journal_button: #If the user clicked 
                 if(button_journal_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
                     return ("journal")
             if event.type == pygame.MOUSEBUTTONDOWN: #If the user clicked 
@@ -126,11 +104,11 @@ def display_main_menu_screen(random_quote, show_journal_button):
         draw_image(button_quit, button_quit_xy)
         text_bg_xy = (110,350)
         draw_image(text_bg, text_bg_xy)
-        render_text(random_quote, (123, 360))
+        render_text(random_quote, (125, 360), 57)
         
         pygame.display.flip()#This updates the screen to show all changes     
         
     pygame.quit()
 
 if __name__ == "__main__":
-    display_main_menu_screen("Placeholder random quote for testing purposes", False)
+    display_main_menu_screen("Placeholder random quote for testing purposes asdfasdf. Placeholder random quote for testing purposes asdf. Placeholder random quote for testing purposes asdfasdfasdf. Placeholder random quote for testing purposes. ", False)
