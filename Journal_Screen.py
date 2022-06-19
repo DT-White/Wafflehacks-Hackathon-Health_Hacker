@@ -16,9 +16,22 @@ WHITE = (255,255,255)
 FPS = 60
 
 background_image = pygame.image.load("resource\\background.png") #load an image as a surface
-
 text_bg = pygame.image.load("resource\\journal_background.png").convert_alpha() #load an image, convert alpha preserves transparency
 
+# {MIND_BUTTON}
+mind_button_image = pygame.image.load("resource\\tab_mind_unselected.png").convert_alpha() #load an image, convert alpha preserves transparency
+mind_button_xy = (40,30)
+mind_button = mind_button_image.get_rect(topleft = mind_button_xy)
+
+# {BODY_BUTTON}
+body_button_image = pygame.image.load("resource\\tab_body_unselected.png").convert_alpha() #load an image, convert alpha preserves transparency
+body_button_xy = (540,30)
+body_button = body_button_image.get_rect(topleft = body_button_xy)
+
+# {JOURNAL_BUTTON}
+journal_button_image = pygame.image.load("resource\\tab_journal_selected.png").convert_alpha() #load an image, convert alpha preserves transparency
+journal_button_xy = (1040,30)
+journal_button = journal_button_image.get_rect(topleft = journal_button_xy)
 
 button_back = pygame.image.load("resource\\icon_back_arrow.png").convert_alpha() #load an image, convert alpha preserves transparency
 button_back_xy = (1392,0)
@@ -88,7 +101,13 @@ def display_journal_screen(todays_jentry):
         for event in pygame.event.get(): #Checks all pygame events every frame
             if event.type == pygame.QUIT: #If the user quits the program
                 run = False #Stop running
-            if event.type == pygame.MOUSEBUTTONDOWN: #If the user clicked 
+            if event.type == pygame.MOUSEBUTTONDOWN: #If the user clicked
+                if(mind_button.collidepoint(event.pos)):
+                    return "mind"
+
+                if(body_button.collidepoint(event.pos)):
+                    return "body"
+
                 if(button_back_rect.collidepoint(event.pos)): #and the position of the click collides with the x_y for the button
                     return ("back")
                 if(button_submit_rect.collidepoint(event.pos)):
